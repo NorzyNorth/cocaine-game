@@ -23,13 +23,13 @@ export class PlayerController extends Component {
   private _velocityY: number = 0.0;
 
   @property
-  private _movementSpeed: number = 7;
+  public _movementSpeed: number = 7;
 
   @property
-  private _gravity: number = 9.81;
+  public _gravity: number = 9.81;
 
   @property
-  private _jumpPower: number = 10;
+  public _jumpPower: number = 10;
 
   protected start(): void {
     this._gameInput = new GameInput();
