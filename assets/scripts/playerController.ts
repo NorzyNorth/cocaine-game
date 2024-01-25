@@ -6,15 +6,21 @@ import {
   Input as EngineInput,
   CharacterController,
   physics,
+  EventMouse,
+  EventKeyboard,
 } from "cc";
 import { GameInput } from "./gameInput";
 const { ccclass, property } = _decorator;
 
-enum _InputEventType {
+export enum InputKeywordEventType {
   DOWN = "down",
   UP = "up",
 }
-
+export enum InputMouseEventType {
+  DOWN = "down",
+  UP = "up",
+  MOVE = "move",
+}
 @ccclass("playerController")
 export class PlayerController extends Component {
   private _movementDirection: Vec3;
@@ -30,8 +36,7 @@ export class PlayerController extends Component {
   @property
   public _gravity: number = 9.81;
 
-
-  public _jumpPower: number = 5 ;
+  public _jumpPower: number = 5;
 
   protected start(): void {
     this._gameInput = new GameInput();
@@ -42,21 +47,36 @@ export class PlayerController extends Component {
   protected update(dt: number): void {
     this.checkGround();
     this.applyGravity(dt);
-    console.log(this._isOnGround);
-    console.log(this._velocityY);
-    console.log(this._jumpPower);
+    // console.log(this._isOnGround);
+    // console.log(this._velocityY);
+    // console.log(this._jumpPower);
     this.move(dt);
     this.jump();
     // console.log(this._velocity);
   }
-
   private applyGameInput(): void {
-    engineInput.on(EngineInput.EventType.KEY_DOWN, (event) =>
-      this._gameInput.getButton(event, _InputEventType.DOWN)
+    this.applyKeywordGameInput();
+    this.applyMouseGameInput();
+  }
+  private applyKeywordGameInput(): void {
+    engineInput.on(EngineInput.EventType.KEY_DOWN, (event: EventKeyboard) =>
+      this._gameInput.getButton(event, InputKeywordEventType.DOWN)
     );
-    engineInput.on(EngineInput.EventType.KEY_UP, (event) =>
-      this._gameInput.getButton(event, _InputEventType.UP)
+    engineInput.on(EngineInput.EventType.KEY_UP, (event: EventKeyboard) =>
+      this._gameInput.getButton(event, InputKeywordEventType.UP)
     );
+  }
+
+  private applyMouseGameInput() {
+    engineInput.on(EngineInput.EventType.MOUSE_MOVE, (event: EventMouse) => {
+      this._gameInput.getMouse(event, InputMouseEventType.MOVE);
+    });
+    engineInput.on(EngineInput.EventType.MOUSE_DOWN, (event: EventMouse) => {
+      this._gameInput.getMouse(event, InputMouseEventType.DOWN);
+    });
+    engineInput.on(EngineInput.EventType.MOUSE_UP, (event: EventMouse) => {
+      this._gameInput.getMouse(event, InputMouseEventType.UP);
+    });
   }
 
   private move(dt: number) {
@@ -64,7 +84,7 @@ export class PlayerController extends Component {
     this._movementDirection = this._gameInput.getInputDirection();
     this._movement = new Vec3(
       this._movementDirection.x * movementDistance,
-      this._movementDirection.y = this._velocityY * dt,
+      (this._movementDirection.y = this._velocityY * dt),
       this._movementDirection.z * movementDistance
     );
     this._characterController.move(this._movement);
@@ -78,7 +98,7 @@ export class PlayerController extends Component {
 
   private checkGround(): boolean {
     this._isOnGround = this._characterController.isGrounded;
-    return this._isOnGround
+    return this._isOnGround;
   }
 
   private jump() {
