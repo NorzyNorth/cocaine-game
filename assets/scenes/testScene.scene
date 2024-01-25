@@ -27,12 +27,15 @@
       },
       {
         "__id__": 35
+      },
+      {
+        "__id__": 39
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 39
+      "__id__": 43
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -63,7 +66,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 40
+      "__id__": 44
     },
     "_id": "1507b517-f779-4ece-863f-d865094da9f3"
   },
@@ -800,7 +803,6 @@
     "__prefab": null,
     "_movementSpeed": 7,
     "_gravity": 9.81,
-    "_jumpPower": 10,
     "_id": "e7b7GYVfxADqVq28WAvlcc"
   },
   {
@@ -932,6 +934,135 @@
     "_id": "ackF9g4pJH5IfESjNsaohz"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "Cube",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 40
+      },
+      {
+        "__id__": 42
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 6.963,
+      "y": 0.5,
+      "z": -5.667
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "10IlfT0ypPcZlBpue2KQFv"
+  },
+  {
+    "__type__": "cc.MeshRenderer",
+    "_name": "Cube<ModelComponent>",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 39
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_materials": [
+      {
+        "__uuid__": "620b6bf3-0369-4560-837f-2a2c00b73c26",
+        "__expectedType__": "cc.Material"
+      }
+    ],
+    "_visFlags": 0,
+    "bakeSettings": {
+      "__id__": 41
+    },
+    "_mesh": {
+      "__uuid__": "1263d74c-8167-4928-91a6-4e2672411f47@a804a",
+      "__expectedType__": "cc.Mesh"
+    },
+    "_shadowCastingMode": 0,
+    "_shadowReceivingMode": 1,
+    "_shadowBias": 0,
+    "_shadowNormalBias": 0,
+    "_reflectionProbeId": -1,
+    "_reflectionProbeBlendId": -1,
+    "_reflectionProbeBlendWeight": 0,
+    "_enabledGlobalStandardSkinObject": false,
+    "_enableMorph": true,
+    "_id": "9aV+Ys4PBIHrrdVYRU/Hi2"
+  },
+  {
+    "__type__": "cc.ModelBakeSettings",
+    "texture": null,
+    "uvParam": {
+      "__type__": "cc.Vec4",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 0
+    },
+    "_bakeable": false,
+    "_castShadow": false,
+    "_receiveShadow": false,
+    "_recieveShadow": false,
+    "_lightmapSize": 64,
+    "_useLightProbe": false,
+    "_bakeToLightProbe": true,
+    "_reflectionProbeType": 0,
+    "_bakeToReflectionProbe": true
+  },
+  {
+    "__type__": "cc.BoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 39
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_material": null,
+    "_isTrigger": false,
+    "_center": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_size": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_id": "03ulG2e4VDHqk1KWjnZMgz"
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": null,
     "asset": null,
@@ -947,28 +1078,28 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 41
-    },
-    "shadows": {
-      "__id__": 42
-    },
-    "_skybox": {
-      "__id__": 43
-    },
-    "fog": {
-      "__id__": 44
-    },
-    "octree": {
       "__id__": 45
     },
-    "skin": {
+    "shadows": {
       "__id__": 46
     },
-    "lightProbeInfo": {
+    "_skybox": {
       "__id__": 47
     },
-    "postSettings": {
+    "fog": {
       "__id__": 48
+    },
+    "octree": {
+      "__id__": 49
+    },
+    "skin": {
+      "__id__": 50
+    },
+    "lightProbeInfo": {
+      "__id__": 51
+    },
+    "postSettings": {
+      "__id__": 52
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false

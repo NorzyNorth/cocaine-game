@@ -30,7 +30,7 @@ export class GameInput {
     this._inputMap.delete(event.keyCode);
   }
 
-  getInputDirection() {
+  getInputDirection(): Vec3 {
     if (this._inputMap.has(87) && !this._inputMap.has(83)) {
       this._axis.x = 1;
     } else if (this._inputMap.has(83) && !this._inputMap.has(87)) {
@@ -49,5 +49,9 @@ export class GameInput {
     this._inputDirection.normalize();
 
     return this._inputDirection;
+  }
+
+  getJumpInput(): boolean{
+    return this._inputMap.has(32)
   }
 }
