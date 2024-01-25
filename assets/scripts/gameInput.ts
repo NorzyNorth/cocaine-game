@@ -39,15 +39,17 @@ export class GameInput {
   getMouse(event: EventMouse, type: InputMouseEventType) {
     if (type === "up") this.onMouseUp(event)
     if (type === "down") this.onMouseDown(event);
-    if (type === "move") {
-    }
-    console.log(this._inputMouseMap);
+    if (type === "move") this.onMouseMove(event)
+    // console.log(this._inputMouseMap);
   }
   onMouseDown(event: EventMouse) {
     this._inputMouseMap.add(event.getButton());
   }
   onMouseUp(event: EventMouse) {
     this._inputMouseMap.delete(event.getButton());
+  }
+  onMouseMove(event : EventMouse) {
+    console.log(event)
   }
 
   getInputDirection(): Vec3 {
