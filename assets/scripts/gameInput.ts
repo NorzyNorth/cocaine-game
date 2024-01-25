@@ -49,7 +49,8 @@ export class GameInput {
     this._inputMouseMap.delete(event.getButton());
   }
   onMouseMove(event : EventMouse) {
-    console.log(event)
+    console.log(`locationX => ${event.getLocationX()}`)
+    console.log(`locationY => ${event.getLocationY()}`)
   }
 
   getInputDirection(): Vec3 {
@@ -81,5 +82,9 @@ export class GameInput {
 
   getJumpInput(): boolean {
     return this._inputKeywordMap.has(32);
+  }
+
+  getCancelInput(): boolean {
+    return this._inputKeywordMap.has(27);
   }
 }
