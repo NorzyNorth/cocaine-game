@@ -6,6 +6,7 @@ import {
   EventMouse,
   game,
 } from "cc";
+import { InputKeywordEventType, InputMouseEventType } from "./playerController";
 
 export enum _InputType {
   MOVEMENT = "movement",
