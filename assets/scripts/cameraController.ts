@@ -7,6 +7,8 @@ import {
   EventMouse,
   EventKeyboard,
   Vec3,
+  geometry,
+  PhysicsSystem,
 } from "cc";
 import { CameraInput, _ScrollDirectionType } from "./cameraInput";
 const { ccclass, property } = _decorator;
@@ -24,13 +26,18 @@ export enum InputMouseEventType {
 export class cameraController extends Component {
   private _cameraInput: CameraInput;
   private _cameraScrollSensivity: number = 0.3;
+  private _cameraRay: geometry.Ray;
 
   start() {
     this._cameraInput = new CameraInput();
     this.applyCameraInput();
+    this.castCameraRay();
   }
 
-  update(deltaTime: number) {}
+  update(deltaTime: number) {
+    this.updateCameraRay();
+    this.checkCameraRayHit();
+  }
 
   private applyCameraInput(): void {
     this.applyKeywordCameraInput();
@@ -49,6 +56,42 @@ export class cameraController extends Component {
     engineInput.on(EngineInput.EventType.MOUSE_WHEEL, (event: EventMouse) => {
       this.scrollCamera(event);
     });
+  }
+
+  private castCameraRay() {
+    this._cameraRay = new geometry.Ray();
+    geometry.Ray.fromPoints(
+      this._cameraRay,
+      new Vec3(
+        this.node.position.x,
+        this.node.position.y,
+        this.node.position.z
+      ),
+      new Vec3(
+        this.node.position.x - this.node.position.x,
+        this.node.position.y - this.node.position.y,
+        this.node.position.z - this.node.position.z
+      )
+    );
+  }
+
+  private updateCameraRay() {
+    this._cameraRay.o = new Vec3(
+      this.node.position.x,
+      this.node.position.y,
+      this.node.position.z
+    );
+    this._cameraRay.d = new Vec3(
+      this.node.position.x - this.node.position.x,
+      this.node.position.y - this.node.position.y,
+      this.node.position.z - this.node.position.z
+    );
+  }
+
+  private checkCameraRayHit() {
+    if (PhysicsSystem.instance.raycastClosest(this._cameraRay)) {
+      console.log("hit");
+    }
   }
 
   scrollCamera(event: EventMouse) {
