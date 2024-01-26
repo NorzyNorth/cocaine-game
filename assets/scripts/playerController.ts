@@ -67,7 +67,7 @@ export class PlayerController extends Component {
       x: event.movementX,
       y: event.movementY,
     };
-    console.log(nowCameraRotate);
+    // console.log(nowCameraRotate);
     if (nowCameraRotate.z > 40 && mouseMovement.y * -1 > 0) {
       mouseMovement.y = 0;
     }
@@ -111,7 +111,7 @@ export class PlayerController extends Component {
       this._gameInput.getMouse(event, InputMouseEventType.UP);
     });
   }
-
+  private _hui = 0
   private move(dt: number) {
     let movementDistance = this._movementSpeed * dt;
     this._movementDirection = this._gameInput.getInputDirection();
@@ -120,7 +120,23 @@ export class PlayerController extends Component {
       (this._movementDirection.y = this._velocityY * dt),
       this._movementDirection.z * movementDistance
     );
+    if (this._movement.x != 0 || this._movement.z != 0) {
+      // console.log(`${this._movement.x} ${this._movement.z}`)
+      const nowCameraRotate = new Vec3();
+      Quat.toEuler(nowCameraRotate, this.camera.getRotation());
+      // console.log(gey)
+      const gey2 = new Vec3(0,nowCameraRotate.y - 90,0)
+
+      this.node.setRotationFromEuler(gey2);
+      const vCamera = new Vec3()
+      const vPlayer = new Vec3()
+      Quat.toEuler(vCamera, this.camera.getRotation());
+      Quat.toEuler(vPlayer, this.node.getRotation());
+      console.log(`${vCamera} ${vPlayer}`)
+
+    }
     this._characterController.move(this._movement);
+    this.node.setRotationFromEuler(new Vec3(0, this._hui++,0));
   }
 
   private applyGravity(dt: number) {

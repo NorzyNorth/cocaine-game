@@ -51,7 +51,7 @@ export class GameInput {
   }
   onMouseDown(event: EventMouse) {
     this._inputMouseMap.add(event.getButton());
-    console.log(event)
+    // console.log(event)
     game.canvas.requestPointerLock();
   }
   onMouseUp(event: EventMouse) {
