@@ -1,16 +1,11 @@
-import {
-  EventKeyboard,
-  input as engineInput,
-  Input as EngineInput,
-  Vec3,
-  EventMouse,
-} from "cc";
+import { EventKeyboard, Vec3, EventMouse } from "cc";
+import { InputKeywordEventType, InputMouseEventType } from "./playerController";
 
 export enum _InputType {
   MOVEMENT = "movement",
   FLY = "fly",
 }
-import { InputKeywordEventType, InputMouseEventType } from "./playerController";
+
 export class GameInput {
   private _inputKeywordMap;
   private _inputMouseMap;
@@ -37,10 +32,9 @@ export class GameInput {
   // 2 - pkm
   // 1 - koleco
   getMouse(event: EventMouse, type: InputMouseEventType) {
-    if (type === "up") this.onMouseUp(event)
+    if (type === "up") this.onMouseUp(event);
     if (type === "down") this.onMouseDown(event);
-    if (type === "move") this.onMouseMove(event)
-    // console.log(this._inputMouseMap);
+    if (type === "move") this.onMouseMove(event);
   }
   onMouseDown(event: EventMouse) {
     this._inputMouseMap.add(event.getButton());
@@ -48,9 +42,9 @@ export class GameInput {
   onMouseUp(event: EventMouse) {
     this._inputMouseMap.delete(event.getButton());
   }
-  onMouseMove(event : EventMouse) {
-    console.log(`locationX => ${event.getLocationX()}`)
-    console.log(`locationY => ${event.getLocationY()}`)
+  onMouseMove(event: EventMouse) {
+    // console.log(`locationX => ${event.getLocationX()}`)
+    // console.log(`locationY => ${event.getLocationY()}`)
   }
 
   getInputDirection(): Vec3 {
