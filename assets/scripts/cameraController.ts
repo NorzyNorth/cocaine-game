@@ -52,11 +52,23 @@ export class cameraController extends Component {
   }
 
   scrollCamera(event: EventMouse) {
-		const scrollY = event.getScrollY();
+    const scrollY = event.getScrollY();
     if (scrollY > 0) {
-			this.node.position = new Vec3(this.node.position.x + this._cameraScrollSensivity, this.node.position.y, this.node.position.z)
+      if (this.node.position.x < -2) {
+        this.node.position = new Vec3(
+          this.node.position.x + this._cameraScrollSensivity,
+          this.node.position.y,
+          this.node.position.z
+        );
+      }
     } else if (scrollY < 0) {
-      this.node.position = new Vec3(this.node.position.x - this._cameraScrollSensivity, this.node.position.y, this.node.position.z)
+      if (this.node.position.x > -5) {
+        this.node.position = new Vec3(
+          this.node.position.x - this._cameraScrollSensivity,
+          this.node.position.y,
+          this.node.position.z
+        );
+      }
     }
   }
 }
