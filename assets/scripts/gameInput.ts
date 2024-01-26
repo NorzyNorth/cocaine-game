@@ -4,6 +4,7 @@ import {
   Input as EngineInput,
   Vec3,
   EventMouse,
+  game,
 } from "cc";
 
 export enum _InputType {
@@ -14,6 +15,10 @@ import { InputKeywordEventType, InputMouseEventType } from "./playerController";
 export class GameInput {
   private _inputKeywordMap;
   private _inputMouseMap;
+  private _mouseDirection = {
+    x:0,
+    y:0
+  }
   private _axis = { x: 0, y: 0, z: 0 };
   private _inputDirection: Vec3;
   private _inputType: _InputType = _InputType.MOVEMENT;
@@ -37,22 +42,32 @@ export class GameInput {
   // 2 - pkm
   // 1 - koleco
   getMouse(event: EventMouse, type: InputMouseEventType) {
-    if (type === "up") this.onMouseUp(event)
+    if (type === "up") this.onMouseUp(event);
     if (type === "down") this.onMouseDown(event);
-    if (type === "move") this.onMouseMove(event)
+    if (type === "move") this.onMouseMove(event);
     // console.log(this._inputMouseMap);
   }
   onMouseDown(event: EventMouse) {
     this._inputMouseMap.add(event.getButton());
+    console.log(event)
+    game.canvas.requestPointerLock();
   }
   onMouseUp(event: EventMouse) {
     this._inputMouseMap.delete(event.getButton());
   }
-  onMouseMove(event : EventMouse) {
-    console.log(`locationX => ${event.getLocationX()}`)
-    console.log(`locationY => ${event.getLocationY()}`)
+  onMouseMove(event: EventMouse) {
+    // console.log(`locationX => ${event.getLocationX()}`);
+    // console.log(`locationY => ${event.getLocationY()}`);
+    this._mouseDirection.x = event.movementX
+    this._mouseDirection.y = event.movementY
+    console.log(`${event.movementX}  ${event.movementY}`)
   }
-
+  getMouseDirection() {
+    return {
+      x: this._mouseDirection.x,
+      y: this._mouseDirection.y
+    }
+  }
   getInputDirection(): Vec3 {
     if (this._inputKeywordMap.has(87) && !this._inputKeywordMap.has(83)) {
       this._axis.x = 1;

@@ -8,6 +8,10 @@ import {
   physics,
   EventMouse,
   EventKeyboard,
+  Node,
+  math,
+  quat,
+  Quat,
 } from "cc";
 import { GameInput } from "./gameInput";
 const { ccclass, property } = _decorator;
@@ -29,7 +33,7 @@ export class PlayerController extends Component {
   private _characterController: CharacterController;
   private _velocityY: number = 0.0;
   private _isOnGround: boolean = false;
-
+  private camera: Node;
   @property
   public _movementSpeed: number = 7;
 
@@ -39,6 +43,7 @@ export class PlayerController extends Component {
   public _jumpPower: number = 5;
 
   protected start(): void {
+    this.camera = this.node.getChildByName(`Cameranode`);
     this._gameInput = new GameInput();
     this._characterController = this.node.getComponent(CharacterController);
     this.applyGameInput();
@@ -54,6 +59,27 @@ export class PlayerController extends Component {
     this.jump();
     // console.log(this._velocity);
   }
+
+  private cameraRotate(event : EventMouse) {
+    const mouseMovement = {
+      x: event.movementX,
+      y: event.movementY
+    }
+    // console.log(mouseMovement)]
+    // console.log(cameraDirection);
+    let sensitivity = 0.5;
+    const cameraDirection = new Vec3(
+      0,
+      (mouseMovement.x * -1) * sensitivity,
+      (mouseMovement.y * -1) * sensitivity
+    )
+    let currentRotation = this.camera.eulerAngles;
+    currentRotation.add(cameraDirection);
+    this.camera.setRotationFromEuler(currentRotation);
+    const gey = Quat.toEuler(this.camera.getRotation(),)
+    
+  }
+
   private applyGameInput(): void {
     this.applyKeywordGameInput();
     this.applyMouseGameInput();
@@ -69,7 +95,7 @@ export class PlayerController extends Component {
 
   private applyMouseGameInput() {
     engineInput.on(EngineInput.EventType.MOUSE_MOVE, (event: EventMouse) => {
-      this._gameInput.getMouse(event, InputMouseEventType.MOVE);
+      this.cameraRotate(event);
     });
     engineInput.on(EngineInput.EventType.MOUSE_DOWN, (event: EventMouse) => {
       this._gameInput.getMouse(event, InputMouseEventType.DOWN);
