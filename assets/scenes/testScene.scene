@@ -35,7 +35,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 56
+      "__id__": 43
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -784,7 +784,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 1.415,
+      "y": 1.515,
       "z": 0
     },
     "_lrot": {
@@ -829,15 +829,15 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -3.116,
-      "y": 0.417,
+      "y": 0,
       "z": 0
     },
     "_lrot": {
       "__type__": "cc.Quat",
-      "x": -0.08455137115049886,
-      "y": -0.7020335217328091,
-      "z": -0.08455137115049885,
-      "w": 0.7020335217328092
+      "x": -0.027976687621560258,
+      "y": -0.706553115448319,
+      "z": -0.027976687621560255,
+      "w": 0.7065531154483191
     },
     "_lscale": {
       "__type__": "cc.Vec3",
@@ -849,7 +849,7 @@
     "_layer": 1073741824,
     "_euler": {
       "__type__": "cc.Vec3",
-      "x": -13.735,
+      "x": -4.535,
       "y": -90,
       "z": 0
     },
@@ -900,6 +900,18 @@
     "_cameraType": -1,
     "_trackingType": 0,
     "_id": "e9LxXU/1ZIxaPs/K4sx4sP"
+  },
+  {
+    "__type__": "5f087uD5iNLhrUjUjJtbYSr",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 29
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_id": "f0PW4ERvhNmojvWBGskTD5"
   },
   {
     "__type__": "cc.CapsuleCollider",
@@ -1270,25 +1282,25 @@
       "__id__": 58
     },
     "shadows": {
-      "__id__": 59
+      "__id__": 46
     },
     "_skybox": {
-      "__id__": 60
+      "__id__": 47
     },
     "fog": {
-      "__id__": 61
+      "__id__": 48
     },
     "octree": {
-      "__id__": 62
+      "__id__": 49
     },
     "skin": {
-      "__id__": 63
+      "__id__": 50
     },
     "lightProbeInfo": {
-      "__id__": 64
+      "__id__": 51
     },
     "postSettings": {
-      "__id__": 65
+      "__id__": 52
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false

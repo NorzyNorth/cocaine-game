@@ -11,7 +11,7 @@ export enum _InputType {
   MOVEMENT = "movement",
   FLY = "fly",
 }
-import { InputKeywordEventType, InputMouseEventType } from "./playerController";
+
 export class GameInput {
   private _inputKeywordMap;
   private _inputMouseMap;
@@ -42,6 +42,7 @@ export class GameInput {
   // 2 - pkm
   // 1 - koleco
   getMouse(event: EventMouse, type: InputMouseEventType) {
+    if (type === "up") this.onMouseUp(event);
     if (type === "up") this.onMouseUp(event);
     if (type === "down") this.onMouseDown(event);
     if (type === "move") this.onMouseMove(event);
