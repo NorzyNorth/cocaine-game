@@ -60,26 +60,31 @@ export class PlayerController extends Component {
     // console.log(this._velocity);
   }
 
-  private cameraRotate(event : EventMouse) {
+  private cameraRotate(event: EventMouse) {
+    const nowCameraRotate = new Vec3();
+    const gey = Quat.toEuler(nowCameraRotate, this.camera.getRotation());
     const mouseMovement = {
       x: event.movementX,
-      y: event.movementY
+      y: event.movementY,
+    };
+    console.log(nowCameraRotate);
+    if (nowCameraRotate.z > 40 && mouseMovement.y * -1 > 0) {
+      mouseMovement.y = 0;
+    }
+    if (nowCameraRotate.z < -50 && mouseMovement.y * -1 < 0) {
+      mouseMovement.y = 0;
     }
     // console.log(mouseMovement)]
     // console.log(cameraDirection);
     let sensitivity = 0.5;
     const cameraDirection = new Vec3(
       0,
-      (mouseMovement.x * -1) * sensitivity,
-      (mouseMovement.y * -1) * sensitivity
-    )
+      mouseMovement.x * -1 * sensitivity,
+      mouseMovement.y * -1 * sensitivity
+    );
     let currentRotation = this.camera.eulerAngles;
     currentRotation.add(cameraDirection);
     this.camera.setRotationFromEuler(currentRotation);
-    const gey1 = new Vec3()
-    const gey = Quat.toEuler(gey1 , this.camera.getRotation(),)
-    console.log(gey1)
-    
   }
 
   private applyGameInput(): void {
