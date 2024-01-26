@@ -62,7 +62,7 @@ export class GameInput {
     // console.log(`locationY => ${event.getLocationY()}`);
     this._mouseDirection.x = event.movementX
     this._mouseDirection.y = event.movementY
-    console.log(`${event.movementX}  ${event.movementY}`)
+    // console.log(`${event.movementX}  ${event.movementY}`)
   }
   getMouseDirection() {
     return {

@@ -76,7 +76,9 @@ export class PlayerController extends Component {
     let currentRotation = this.camera.eulerAngles;
     currentRotation.add(cameraDirection);
     this.camera.setRotationFromEuler(currentRotation);
-    const gey = Quat.toEuler(this.camera.getRotation(),)
+    const gey1 = new Vec3()
+    const gey = Quat.toEuler(gey1 , this.camera.getRotation(),)
+    console.log(gey1)
     
   }
 
