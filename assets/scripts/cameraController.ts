@@ -28,18 +28,21 @@ export class cameraController extends Component {
   private _cameraInput: CameraInput;
   private _cameraScrollSensivity: number = 0.3;
   private _cameraRay: geometry.Ray;
-  rayGey
   start() {
     this._cameraInput = new CameraInput();
     this.applyCameraInput();
     this.castCameraRay();
-    this.rayGey = new CustomRay(new Vec3(0,0,0), new Vec3(10,10,10),10)
-    this.rayGey.diplay()
   }
 
   update(deltaTime: number) {
     this.updateCameraRay();
     this.checkCameraRayHit();
+    // console.log(`node pos ${this.node.getPosition()}`);
+    // console.log();
+    const fromWorld = new Vec3()
+    const toWorld = new Vec3()
+    this.node.getWorldPosition(fromWorld)
+    this.node.getParent().getWorldPosition(toWorld)
   }
 
   private applyCameraInput(): void {
