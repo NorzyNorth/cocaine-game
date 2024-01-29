@@ -90,7 +90,7 @@ export class cameraController extends Component {
 
   private checkCameraRayHit() {
     if (PhysicsSystem.instance.raycastClosest(this._cameraRay)) {
-      console.log("hit");
+      // console.log("hit");
     }
   }
 

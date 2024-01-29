@@ -17,9 +17,9 @@ export class GameInput {
   private _inputKeywordMap;
   private _inputMouseMap;
   private _mouseDirection = {
-    x:0,
-    y:0
-  }
+    x: 0,
+    y: 0,
+  };
   private _axis = { x: 0, y: 0, z: 0 };
   private _inputDirection: Vec3;
   private _inputType: _InputType = _InputType.MOVEMENT;
@@ -60,15 +60,15 @@ export class GameInput {
   onMouseMove(event: EventMouse) {
     // console.log(`locationX => ${event.getLocationX()}`);
     // console.log(`locationY => ${event.getLocationY()}`);
-    this._mouseDirection.x = event.movementX
-    this._mouseDirection.y = event.movementY
+    this._mouseDirection.x = event.movementX;
+    this._mouseDirection.y = event.movementY;
     // console.log(`${event.movementX}  ${event.movementY}`)
   }
   getMouseDirection() {
     return {
       x: this._mouseDirection.x,
-      y: this._mouseDirection.y
-    }
+      y: this._mouseDirection.y,
+    };
   }
   getInputDirection(): Vec3 {
     if (this._inputKeywordMap.has(87) && !this._inputKeywordMap.has(83)) {
@@ -95,6 +95,18 @@ export class GameInput {
     this._inputDirection.normalize();
 
     return this._inputDirection;
+  }
+
+  getMovementInput(): boolean {
+    if (
+      this._inputKeywordMap.has(87) ||
+      this._inputKeywordMap.has(83) ||
+      this._inputKeywordMap.has(65) ||
+      this._inputKeywordMap.has(68)
+    ) {
+      return true;
+    }
+    return false;
   }
 
   getJumpInput(): boolean {
