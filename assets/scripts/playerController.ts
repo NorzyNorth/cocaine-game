@@ -70,7 +70,7 @@ export class PlayerController extends Component {
       x: event.movementX,
       y: event.movementY,
     };
-    console.log(nowCameraRotate);
+    // console.log(nowCameraRotate);
     if (nowCameraRotate.z > 40 && mouseMovement.y * -1 > 0) {
       mouseMovement.y = 0;
     }

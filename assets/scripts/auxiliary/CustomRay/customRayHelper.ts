@@ -3,13 +3,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('DrawLineScript')
 export class DrawLineScript extends Component {
-    start() {
-
-    }
-    constructor() {
-        super();
-        
-    }
     onLoad() {
         const lineNode = new Node("LineNode");
         this.node.addChild(lineNode);
@@ -18,7 +11,7 @@ export class DrawLineScript extends Component {
         const endPoint = new Vec3(10, 10, 10);
 
         // Рисование линии
-        graphics.lineWidth = 5;
+        graphics.lineWidth = 100;
         graphics.strokeColor = Color.GREEN;
         graphics.moveTo(startPoint.x, startPoint.y);
         graphics.lineTo(endPoint.x, endPoint.y);
