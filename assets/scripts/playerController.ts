@@ -58,7 +58,7 @@ export class PlayerController extends Component {
     // console.log(this._velocityY);
     // console.log(this._jumpPower);
     this.rotateBeforeMove();
-    // this.move(dt);
+    this.move(dt);
     this.jump();
     // console.log(this._velocity);
   }
@@ -114,33 +114,6 @@ export class PlayerController extends Component {
       this._gameInput.getMouse(event, InputMouseEventType.UP);
     });
   }
-  //   private _hui = 0
-  //   private move(dt: number) {
-  //     let movementDistance = this._movementSpeed * dt;
-  //     this._movementDirection = this._gameInput.getInputDirection();
-  //     this._movement = new Vec3(
-  //       this._movementDirection.x * movementDistance,
-  //       (this._movementDirection.y = this._velocityY * dt),
-  //       this._movementDirection.z * movementDistance
-  //     );
-  //     if (this._movement.x != 0 || this._movement.z != 0) {
-  //       // console.log(`${this._movement.x} ${this._movement.z}`)
-  //       const nowCameraRotate = new Vec3();
-  //       Quat.toEuler(nowCameraRotate, this.camera.getRotation());
-  //       // console.log(gey)
-  //       const gey2 = new Vec3(0,nowCameraRotate.y - 90,0)
-
-  //       this.node.setRotationFromEuler(gey2);
-  //       const vCamera = new Vec3()
-  //       const vPlayer = new Vec3()
-  //       Quat.toEuler(vCamera, this.camera.getRotation());
-  //       Quat.toEuler(vPlayer, this.node.getRotation());
-  //       console.log(`${vCamera} ${vPlayer}`)
-
-  //     }
-  //     this._characterController.move(this._movement);
-  //     this.node.setRotationFromEuler(new Vec3(0, this._hui++,0));
-  //   }
 
   private rotateBeforeMove() {
     if (this._gameInput.getMovementInput()) {
@@ -159,6 +132,7 @@ export class PlayerController extends Component {
       (this._movementDirection.y = this._velocityY * dt),
       this._movementDirection.z * movementDistance
     );
+    Vec3.transformQuat(this._movement, this._movement, this.node.rotation)
     this._characterController.move(this._movement);
   }
 
