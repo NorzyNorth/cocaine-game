@@ -11,6 +11,7 @@ import {
   PhysicsSystem,
 } from "cc";
 import { CameraInput, _ScrollDirectionType } from "./cameraInput";
+import CustomRay from "./auxiliary/customRay";
 const { ccclass, property } = _decorator;
 
 export enum InputKeywordEventType {
@@ -27,11 +28,13 @@ export class cameraController extends Component {
   private _cameraInput: CameraInput;
   private _cameraScrollSensivity: number = 0.3;
   private _cameraRay: geometry.Ray;
-
+  rayGey
   start() {
     this._cameraInput = new CameraInput();
     this.applyCameraInput();
     this.castCameraRay();
+    this.rayGey = new CustomRay(new Vec3(0,0,0), new Vec3(10,10,10),10)
+    this.rayGey.diplay()
   }
 
   update(deltaTime: number) {
