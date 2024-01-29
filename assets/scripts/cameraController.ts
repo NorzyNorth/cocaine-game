@@ -27,22 +27,24 @@ export enum InputMouseEventType {
 export class cameraController extends Component {
   private _cameraInput: CameraInput;
   private _cameraScrollSensivity: number = 0.3;
-  private _cameraRay: geometry.Ray;
+  private _cameraRay: CustomRay;
   start() {
     this._cameraInput = new CameraInput();
     this.applyCameraInput();
     this.castCameraRay();
+    this._cameraRay = new CustomRay(this.node, new Vec3(), new Vec3());
   }
 
   update(deltaTime: number) {
-    this.updateCameraRay();
-    this.checkCameraRayHit();
+    // this.updateCameraRay();
+    // this.checkCameraRayHit();
     // console.log(`node pos ${this.node.getPosition()}`);
     // console.log();
-    const fromWorld = new Vec3()
-    const toWorld = new Vec3()
-    this.node.getWorldPosition(fromWorld)
-    this.node.getParent().getWorldPosition(toWorld)
+    const fromWorld = new Vec3();
+    const toWorld = new Vec3();
+    this.node.getWorldPosition(fromWorld);
+    this.node.getParent().getWorldPosition(toWorld);
+    this._cameraRay.update(fromWorld, toWorld);
   }
 
   private applyCameraInput(): void {
@@ -64,41 +66,26 @@ export class cameraController extends Component {
     });
   }
 
-  private castCameraRay() {
-    this._cameraRay = new geometry.Ray();
-    geometry.Ray.fromPoints(
-      this._cameraRay,
-      new Vec3(
-        this.node.position.x,
-        this.node.position.y,
-        this.node.position.z
-      ),
-      new Vec3(
-        this.node.position.x - this.node.position.x,
-        this.node.position.y - this.node.position.y,
-        this.node.position.z - this.node.position.z
-      )
-    );
-  }
+  private castCameraRay() {}
 
-  private updateCameraRay() {
-    this._cameraRay.o = new Vec3(
-      this.node.position.x,
-      this.node.position.y,
-      this.node.position.z
-    );
-    this._cameraRay.d = new Vec3(
-      this.node.position.x - this.node.position.x,
-      this.node.position.y - this.node.position.y,
-      this.node.position.z - this.node.position.z
-    );
-  }
+  // private updateCameraRay() {
+  //   this._cameraRay.o = new Vec3(
+  //     this.node.position.x,
+  //     this.node.position.y,
+  //     this.node.position.z
+  //   );
+  //   this._cameraRay.d = new Vec3(
+  //     this.node.position.x - this.node.position.x,
+  //     this.node.position.y - this.node.position.y,
+  //     this.node.position.z - this.node.position.z
+  //   );
+  // }
 
-  private checkCameraRayHit() {
-    if (PhysicsSystem.instance.raycastClosest(this._cameraRay)) {
-      // console.log("hit");
-    }
-  }
+  // private checkCameraRayHit() {
+  //   if (PhysicsSystem.instance.raycastClosest(this._cameraRay)) {
+  //     // console.log("hit");
+  //   }
+  // }
 
   scrollCamera(event: EventMouse) {
     const scrollY = event.getScrollY();

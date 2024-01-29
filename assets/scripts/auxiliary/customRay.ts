@@ -5,8 +5,9 @@ import {
   Vec3,
   geometry,
   PhysicsSystem,
+  Node
 } from "cc";
-
+import { LineDrawer } from "./CustomRay/customRayHelper";
 export default class CustomRay {
   from: Vec3;
   to: Vec3;
@@ -14,7 +15,10 @@ export default class CustomRay {
   private ray = { geometry };
   private _line = new Line();
   private _ray: geometry.Ray;
-  constructor(from: Vec3, to: Vec3) {
+  private _helper : LineDrawer
+  node : Node
+  constructor(node : Node ,from: Vec3, to: Vec3) {
+    this.node = node
     this.from = from;
     this.to = to;
     this._ray = new geometry.Ray();
@@ -32,7 +36,14 @@ export default class CustomRay {
   update(from: Vec3, to: Vec3) {
     geometry.Ray.fromPoints(this._ray,from,to)
     console.log(`Ray from ${this._ray.o} to ${this._ray.d}`)
+    this.diplay()
   }
 
-  diplay() {}
+  diplay() {
+    console.log(`Big Dildo 1`);
+    const lineDrawer = this.node.getComponent(LineDrawer);
+    if (lineDrawer) {
+        lineDrawer.drawLine(this.from, this.to);
+    }
+  }
 }
