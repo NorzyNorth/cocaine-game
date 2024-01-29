@@ -65,11 +65,12 @@ export class PlayerController extends Component {
 
   private cameraRotate(event: EventMouse) {
     const nowCameraRotate = new Vec3();
+    Quat.toEuler(nowCameraRotate, this._camera.getRotation());
     const mouseMovement = {
       x: event.movementX,
       y: event.movementY,
     };
-    // console.log(nowCameraRotate);
+    console.log(nowCameraRotate);
     if (nowCameraRotate.z > 40 && mouseMovement.y * -1 > 0) {
       mouseMovement.y = 0;
     }
