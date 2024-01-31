@@ -24,7 +24,7 @@ export default class CustomRay {
     this._ray = new geometry.Ray();
     geometry.Ray.fromPoints(this._ray,from,to)
   }
-  isHit() {
+  hasHit() {
     const buf = []
     if (PhysicsSystem.instance.raycast(this._ray)) {
       PhysicsSystem.instance.raycastResults.map(el => {
@@ -36,7 +36,7 @@ export default class CustomRay {
   update(from: Vec3, to: Vec3) {
     geometry.Ray.fromPoints(this._ray,from,to)
     console.log(`Ray from ${this._ray.o} to ${this._ray.d}`)
-    this.diplay()
+    // this.diplay()
   }
 
   diplay() {

@@ -32,7 +32,6 @@ export class cameraController extends Component {
     this._cameraInput = new CameraInput();
     this.applyCameraInput();
     this.castCameraRay();
-    this._cameraRay = new CustomRay(this.node, new Vec3(), new Vec3());
   }
 
   update(deltaTime: number) {
@@ -40,11 +39,8 @@ export class cameraController extends Component {
     // this.checkCameraRayHit();
     // console.log(`node pos ${this.node.getPosition()}`);
     // console.log();
-    const fromWorld = new Vec3();
-    const toWorld = new Vec3();
-    this.node.getWorldPosition(fromWorld);
-    this.node.getParent().getWorldPosition(toWorld);
-    this._cameraRay.update(fromWorld, toWorld);
+    this.updateCameraRay();
+    console.log(this._cameraRay.hasHit());
   }
 
   private applyCameraInput(): void {
@@ -66,7 +62,17 @@ export class cameraController extends Component {
     });
   }
 
-  private castCameraRay() {}
+  private castCameraRay() {
+    this._cameraRay = new CustomRay(this.node, new Vec3(), new Vec3());
+  }
+
+  private updateCameraRay() {
+    const fromWorld = new Vec3();
+    const toWorld = new Vec3();
+    this.node.getWorldPosition(fromWorld);
+    this.node.getParent().getWorldPosition(toWorld);
+    this._cameraRay.update(fromWorld, toWorld);
+  }
 
   // private updateCameraRay() {
   //   this._cameraRay.o = new Vec3(
