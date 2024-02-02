@@ -70,7 +70,10 @@ export class GameInput {
     };
   }
   getInputDirection(): Vec3 {
-    if (GameInput._inputKeywordMap.has(87) && !GameInput._inputKeywordMap.has(83)) {
+    if (
+      GameInput._inputKeywordMap.has(87) &&
+      !GameInput._inputKeywordMap.has(83)
+    ) {
       this._axis.x = 1;
     } else if (
       GameInput._inputKeywordMap.has(83) &&
@@ -80,7 +83,10 @@ export class GameInput {
     } else {
       this._axis.x = 0;
     }
-    if (GameInput._inputKeywordMap.has(68) && !GameInput._inputKeywordMap.has(65)) {
+    if (
+      GameInput._inputKeywordMap.has(68) &&
+      !GameInput._inputKeywordMap.has(65)
+    ) {
       this._axis.z = 1;
     } else if (
       GameInput._inputKeywordMap.has(65) &&
@@ -120,7 +126,18 @@ export class GameInput {
     return GameInput._inputKeywordMap.has(16);
   }
 
+  private static _isSwitchToFlyPressed: boolean = false;
+  
   static getSwitchToFlyInput(): boolean {
-    return GameInput._inputKeywordMap.has(86);
+    if (
+      GameInput._inputKeywordMap.has(86) &&
+      !GameInput._isSwitchToFlyPressed
+    ) {
+      GameInput._isSwitchToFlyPressed = true;
+      return true;
+    }
+    if (!GameInput._inputKeywordMap.has(86))
+      GameInput._isSwitchToFlyPressed = false;
+    return false;
   }
 }

@@ -57,7 +57,7 @@ export class PlayerController extends Component {
 
   protected update(deltaTime: number): void {
     this.checkGround();
-    console.log(this._playerState);
+    // console.log(this._playerState);
     switch (this._playerState) {
       case _PlayerStateType.BASE:
         this.applyBasicController(deltaTime);
@@ -195,17 +195,10 @@ export class PlayerController extends Component {
   }
 
   private switchFlyMode() {
-    if (
-      GameInput.getSwitchToFlyInput() &&
-      this._playerState === _PlayerStateType.BASE
-    ) {
-      this._playerState = _PlayerStateType.FLY;
-    }
-    if (
-      GameInput.getSwitchToFlyInput() &&
-      this._playerState === _PlayerStateType.FLY
-    ) {
-      this._playerState = _PlayerStateType.BASE;
-    }
+    if (!GameInput.getSwitchToFlyInput()) return;
+    this._playerState =
+      this._playerState == _PlayerStateType.BASE
+        ? _PlayerStateType.FLY
+        : _PlayerStateType.BASE;
   }
 }

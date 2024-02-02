@@ -32,7 +32,7 @@ export class networkClient extends Component {
     const pahan = this.node.getParent();
     const positionPlayer = new Vec3();
     pahan.getWorldPosition(positionPlayer);
-    console.log(positionPlayer)
+    // console.log(positionPlayer)
     const fUpdate: UpdateData = {
       x: positionPlayer.x,
       y: positionPlayer.y,
