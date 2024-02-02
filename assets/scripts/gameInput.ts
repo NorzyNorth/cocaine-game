@@ -14,7 +14,7 @@ export enum _InputType {
 }
 
 export class GameInput {
-  private _inputKeywordMap;
+  private static _inputKeywordMap;
   private _inputMouseMap;
   private _mouseDirection = {
     x: 0,
@@ -25,7 +25,7 @@ export class GameInput {
   private _inputType: _InputType = _InputType.MOVEMENT;
   constructor(type?: _InputType) {
     type ? (this._inputType = type) : null;
-    this._inputKeywordMap = new Set();
+    GameInput._inputKeywordMap = new Set();
     this._inputMouseMap = new Set();
   }
   getButton(event: EventKeyboard, type: InputKeywordEventType) {
@@ -33,10 +33,10 @@ export class GameInput {
     if (type === "up") this.onKeyUp(event);
   }
   onKeyDown(event: EventKeyboard) {
-    this._inputKeywordMap.add(event.keyCode);
+    GameInput._inputKeywordMap.add(event.keyCode);
   }
   onKeyUp(event: EventKeyboard) {
-    this._inputKeywordMap.delete(event.keyCode);
+    GameInput._inputKeywordMap.delete(event.keyCode);
   }
 
   // 0 - lkm
@@ -71,21 +71,21 @@ export class GameInput {
     };
   }
   getInputDirection(): Vec3 {
-    if (this._inputKeywordMap.has(87) && !this._inputKeywordMap.has(83)) {
+    if (GameInput._inputKeywordMap.has(87) && !GameInput._inputKeywordMap.has(83)) {
       this._axis.x = 1;
     } else if (
-      this._inputKeywordMap.has(83) &&
-      !this._inputKeywordMap.has(87)
+      GameInput._inputKeywordMap.has(83) &&
+      !GameInput._inputKeywordMap.has(87)
     ) {
       this._axis.x = -1;
     } else {
       this._axis.x = 0;
     }
-    if (this._inputKeywordMap.has(68) && !this._inputKeywordMap.has(65)) {
+    if (GameInput._inputKeywordMap.has(68) && !GameInput._inputKeywordMap.has(65)) {
       this._axis.z = 1;
     } else if (
-      this._inputKeywordMap.has(65) &&
-      !this._inputKeywordMap.has(68)
+      GameInput._inputKeywordMap.has(65) &&
+      !GameInput._inputKeywordMap.has(68)
     ) {
       this._axis.z = -1;
     } else {
@@ -97,7 +97,7 @@ export class GameInput {
     return this._inputDirection;
   }
 
-  getMovementInput(): boolean {
+  static getMovementInput(): boolean {
     if (
       this._inputKeywordMap.has(87) ||
       this._inputKeywordMap.has(83) ||
@@ -110,10 +110,10 @@ export class GameInput {
   }
 
   getJumpInput(): boolean {
-    return this._inputKeywordMap.has(32);
+    return GameInput._inputKeywordMap.has(32);
   }
 
   getCancelInput(): boolean {
-    return this._inputKeywordMap.has(27);
+    return GameInput._inputKeywordMap.has(27);
   }
 }
