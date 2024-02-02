@@ -46,7 +46,7 @@ export class PlayerController extends Component {
 
   protected start(): void {
     this._gameInput = new GameInput();
-    this._camera = this.node.getChildByName(`CameraNode`);
+    this._camera = this.node.getChildByName("CameraNode");
     this._characterController = this.node.getComponent(CharacterController);
     this.applyGameInput();
   }

@@ -29,8 +29,8 @@ export class GameInput {
     this._inputMouseMap = new Set();
   }
   getButton(event: EventKeyboard, type: InputKeywordEventType) {
-    if (type === "down") this.onKeyDown(event);
-    if (type === "up") this.onKeyUp(event);
+    if (type === InputKeywordEventType.DOWN) this.onKeyDown(event);
+    if (type === InputKeywordEventType.UP) this.onKeyUp(event);
   }
   onKeyDown(event: EventKeyboard) {
     GameInput._inputKeywordMap.add(event.keyCode);
@@ -43,10 +43,9 @@ export class GameInput {
   // 2 - pkm
   // 1 - koleco
   getMouse(event: EventMouse, type: InputMouseEventType) {
-    if (type === "up") this.onMouseUp(event);
-    if (type === "up") this.onMouseUp(event);
-    if (type === "down") this.onMouseDown(event);
-    if (type === "move") this.onMouseMove(event);
+    if (type === InputMouseEventType.UP) this.onMouseUp(event);
+    if (type === InputMouseEventType.DOWN) this.onMouseDown(event);
+    if (type === InputMouseEventType.MOVE) this.onMouseMove(event);
     // console.log(this._inputMouseMap);
   }
   onMouseDown(event: EventMouse) {
