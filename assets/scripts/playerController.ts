@@ -33,7 +33,7 @@ export class PlayerController extends Component {
   private _viewDirection: Vec3 = new Vec3(0, 0, 0);
   private _gameInput: GameInput;
   private _movement: Vec3;
-  private _playerState: _PlayerStateType = _PlayerStateType.BASE
+  private _playerState: _PlayerStateType = _PlayerStateType.BASE;
   private _characterController: CharacterController;
   private _velocityY: number = 0.0;
   private _isOnGround: boolean = false;
@@ -57,7 +57,16 @@ export class PlayerController extends Component {
 
   protected update(deltaTime: number): void {
     this.checkGround();
-    this.applyBasicController(deltaTime);
+    console.log(this._playerState);
+    switch (this._playerState) {
+      case _PlayerStateType.BASE:
+        this.applyBasicController(deltaTime);
+        break;
+      case _PlayerStateType.FLY:
+        this.applyFlyController(deltaTime);
+        break;
+    }
+
     // console.log(this._isOnGround);
     // console.log(this._velocityY);
     // console.log(this._jumpPower);
@@ -65,8 +74,13 @@ export class PlayerController extends Component {
     // console.log(this._velocity);
   }
 
+  private applyFlyController(deltaTime: number) {
+    this.switchFlyMode();
+  }
+
   private applyBasicController(deltaTime: number) {
     this.applyGravity(deltaTime);
+    this.switchFlyMode();
     this.rotateBeforeMove();
     this.walk(deltaTime);
     this.run(deltaTime);
@@ -180,5 +194,18 @@ export class PlayerController extends Component {
     }
   }
 
-  private changePlayerState() {}
+  private switchFlyMode() {
+    if (
+      GameInput.getSwitchToFlyInput() &&
+      this._playerState === _PlayerStateType.BASE
+    ) {
+      this._playerState = _PlayerStateType.FLY;
+    }
+    if (
+      GameInput.getSwitchToFlyInput() &&
+      this._playerState === _PlayerStateType.FLY
+    ) {
+      this._playerState = _PlayerStateType.BASE;
+    }
+  }
 }
