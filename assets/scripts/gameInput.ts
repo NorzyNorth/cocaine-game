@@ -118,6 +118,6 @@ export class GameInput {
   }
 
   getRunInput(): boolean {
-    return this._inputKeywordMap.has(16);
+    return GameInput._inputKeywordMap.has(16);
   }
 }
