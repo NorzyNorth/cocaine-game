@@ -35,12 +35,12 @@ export default class CustomRay {
   }
   update(from: Vec3, to: Vec3) {
     geometry.Ray.fromPoints(this._ray,from,to)
-    console.log(`Ray from ${this._ray.o} to ${this._ray.d}`)
+    // console.log(`Ray from ${this._ray.o} to ${this._ray.d}`)
     // this.diplay()
   }
 
   diplay() {
-    console.log(`Big Dildo 1`);
+    // console.log(`Big Dildo 1`);
     const lineDrawer = this.node.getComponent(LineDrawer);
     if (lineDrawer) {
         lineDrawer.drawLine(this.from, this.to);

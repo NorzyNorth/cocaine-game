@@ -40,7 +40,7 @@ export class cameraController extends Component {
     // console.log(`node pos ${this.node.getPosition()}`);
     // console.log();
     this.updateCameraRay();
-    console.log(this._cameraRay.hasHit());
+    // console.log(this._cameraRay.hasHit());
   }
 
   private applyCameraInput(): void {

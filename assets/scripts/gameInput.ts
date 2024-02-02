@@ -109,15 +109,15 @@ export class GameInput {
     return false;
   }
 
-  getJumpInput(): boolean {
+  static getJumpInput(): boolean {
     return GameInput._inputKeywordMap.has(32);
   }
 
-  getCancelInput(): boolean {
+  static getCancelInput(): boolean {
     return GameInput._inputKeywordMap.has(27);
   }
 
-  getRunInput(): boolean {
+  static getRunInput(): boolean {
     return GameInput._inputKeywordMap.has(16);
   }
 }
