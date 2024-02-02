@@ -37,7 +37,9 @@ export class PlayerController extends Component {
   private _isOnGround: boolean = false;
   private _camera: Node;
   @property
-  public _movementSpeed: number = 7;
+  public _walkSpeed: number = 7;
+  public _runSpeed: number = 14;
+  public _movementSpeed: number = this._walkSpeed;
 
   @property
   public _gravity: number = 9.81;
@@ -59,6 +61,7 @@ export class PlayerController extends Component {
     // console.log(this._jumpPower);
     this.rotateBeforeMove();
     this.move(dt);
+    this.run();
     this.jump();
     // console.log(this._velocity);
   }
@@ -147,6 +150,15 @@ export class PlayerController extends Component {
   private checkGround(): boolean {
     this._isOnGround = this._characterController.isGrounded;
     return this._isOnGround;
+  }
+
+  private run() {
+    if (this._gameInput.getRunInput() && this._isOnGround) {
+      this._movementSpeed = this._runSpeed
+    } else {
+      this._movementSpeed = math.lerp(this._runSpeed, this._walkSpeed, 0.3);
+    }
+    console.log(this._movementSpeed);
   }
 
   private jump() {

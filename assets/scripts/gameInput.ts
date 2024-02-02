@@ -116,4 +116,8 @@ export class GameInput {
   getCancelInput(): boolean {
     return this._inputKeywordMap.has(27);
   }
+
+  getRunInput(): boolean {
+    return this._inputKeywordMap.has(16);
+  }
 }
