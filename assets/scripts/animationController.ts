@@ -29,7 +29,7 @@ export class AnimeController extends Component {
   }
 
   useWalk() {
-    console.log(`anime -> ${GameInput.getMovementInput()}`)
+    // console.log(`anime -> ${GameInput.getMovementInput()}`)
     if (GameInput.getMovementInput()) {
       this._animationController.setValue("walking", true);
     }

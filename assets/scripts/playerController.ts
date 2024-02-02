@@ -120,7 +120,7 @@ export class PlayerController extends Component {
   }
 
   private rotateBeforeMove() {
-    console.log(GameInput.getMovementInput())
+    // console.log(GameInput.getMovementInput())
     if (GameInput.getMovementInput()) {
       this.node.rotate(
         new Quat(0, this._camera.rotation.y, 0, this._camera.rotation.w)
@@ -158,7 +158,7 @@ export class PlayerController extends Component {
     } else {
       this._movementSpeed = math.lerp(this._runSpeed, this._walkSpeed, 0.3);
     }
-    console.log(this._movementSpeed);
+    // console.log(this._movementSpeed);
   }
 
   private jump() {

@@ -40,7 +40,7 @@ export class cameraController extends Component {
     // console.log(`node pos ${this.node.getPosition()}`);
     // console.log();
     this.updateCameraRay();
-    console.log(this._cameraRay.hasHit());
+    // console.log(this._cameraRay.hasHit());
   }
 
   private applyCameraInput(): void {
@@ -70,7 +70,10 @@ export class cameraController extends Component {
     const fromWorld = new Vec3();
     const toWorld = new Vec3();
     this.node.getWorldPosition(fromWorld);
-    this.node.getParent().getWorldPosition(toWorld);
+    const parentNode = this.node.getParent()
+    parentNode.getWorldPosition(toWorld);
+    // console.log(parentNode);
+    
     this._cameraRay.update(fromWorld, toWorld);
   }
 

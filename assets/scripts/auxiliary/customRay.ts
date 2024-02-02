@@ -34,8 +34,10 @@ export default class CustomRay {
     return buf;
   }
   update(from: Vec3, to: Vec3) {
+    // console.log(to);
+    
     geometry.Ray.fromPoints(this._ray,from,to)
-    console.log(`Ray from ${this._ray.o} to ${this._ray.d}`)
+    // console.log(`Ray from ${this._ray.o} to ${this._ray.d}`)
     // this.diplay()
   }
 
