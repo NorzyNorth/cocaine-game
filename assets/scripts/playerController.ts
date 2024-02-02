@@ -120,8 +120,8 @@ export class PlayerController extends Component {
   }
 
   private rotateBeforeMove() {
-    console.log(this._gameInput.getMovementInput())
-    if (this._gameInput.getMovementInput()) {
+    console.log(GameInput.getMovementInput())
+    if (GameInput.getMovementInput()) {
       this.node.rotate(
         new Quat(0, this._camera.rotation.y, 0, this._camera.rotation.w)
       );
