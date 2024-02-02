@@ -1,7 +1,13 @@
-import { _decorator, Component, Node, sys } from "cc";
+import { _decorator, Component, Node, sys, Vec3 } from "cc";
 const { ccclass, property } = _decorator;
 import io from "socket.io-client/dist/socket.io.js";
 import { Socket } from "socket.io-client";
+
+interface UpdateData {
+  x: number;
+  y: number;
+  z: number;
+}
 
 @ccclass("networkClient")
 export class networkClient extends Component {
@@ -21,5 +27,18 @@ export class networkClient extends Component {
     } else {
       console.log("Running in native context");
     }
+  }
+  protected update(dt: number): void {
+    const pahan = this.node.getParent();
+    const positionPlayer = new Vec3();
+    pahan.getWorldPosition(positionPlayer);
+    console.log(positionPlayer)
+    const fUpdate: UpdateData = {
+      x: positionPlayer.x,
+      y: positionPlayer.y,
+      z: positionPlayer.z,
+    };
+    this.socket.emit("updateData", fUpdate);
+    
   }
 }
