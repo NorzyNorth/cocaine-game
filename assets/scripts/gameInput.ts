@@ -119,4 +119,8 @@ export class GameInput {
   static getRunInput(): boolean {
     return GameInput._inputKeywordMap.has(16);
   }
+
+  static getSwitchStateInput(): boolean {
+    return GameInput._inputKeywordMap.has(86);
+  }
 }
