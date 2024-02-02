@@ -5,15 +5,13 @@ import {
   input as engineInput,
   Input as EngineInput,
   CharacterController,
-  physics,
   EventMouse,
   EventKeyboard,
   Node,
   math,
-  quat,
   Quat,
 } from "cc";
-import { GameInput } from "./gameInput";
+import { GameInput, _InputType } from "./gameInput";
 const { ccclass, property } = _decorator;
 
 export enum InputKeywordEventType {
@@ -25,20 +23,24 @@ export enum InputMouseEventType {
   UP = "up",
   MOVE = "move",
 }
+export enum _PlayerStateType {
+  BASE = "base",
+  FLY = "fly",
+}
 @ccclass("playerController")
 export class PlayerController extends Component {
   private _movementDirection: Vec3 = new Vec3(0, 0, 0);
   private _viewDirection: Vec3 = new Vec3(0, 0, 0);
   private _gameInput: GameInput;
   private _movement: Vec3;
-  private _walkableNormal = new Vec3(Vec3.UNIT_Y);
+  private _playerState: _PlayerStateType = _PlayerStateType.BASE
   private _characterController: CharacterController;
   private _velocityY: number = 0.0;
   private _isOnGround: boolean = false;
   private _camera: Node;
   @property
   public _walkSpeed: number = 7;
-  public _runSpeed: number = 14;
+  public _runSpeed: number = 10;
   public _movementSpeed: number = this._walkSpeed;
 
   @property
@@ -47,23 +49,28 @@ export class PlayerController extends Component {
   public _jumpPower: number = 5;
 
   protected start(): void {
-    this._camera = this.node.getChildByName(`CameraNode`);
     this._gameInput = new GameInput();
+    this._camera = this.node.getChildByName("CameraNode");
     this._characterController = this.node.getComponent(CharacterController);
     this.applyGameInput();
   }
 
-  protected update(dt: number): void {
+  protected update(deltaTime: number): void {
     this.checkGround();
-    this.applyGravity(dt);
+    this.applyBasicController(deltaTime);
     // console.log(this._isOnGround);
     // console.log(this._velocityY);
     // console.log(this._jumpPower);
-    this.rotateBeforeMove();
-    this.move(dt);
-    this.run();
-    this.jump();
+
     // console.log(this._velocity);
+  }
+
+  private applyBasicController(deltaTime: number) {
+    this.applyGravity(deltaTime);
+    this.rotateBeforeMove();
+    this.walk(deltaTime);
+    this.run(deltaTime);
+    this.jump();
   }
 
   private cameraRotate(event: EventMouse) {
@@ -120,7 +127,7 @@ export class PlayerController extends Component {
   }
 
   private rotateBeforeMove() {
-    // console.log(GameInput.getMovementInput())
+    // console.log(GameInput.getMovementInput());
     if (GameInput.getMovementInput()) {
       this.node.rotate(
         new Quat(0, this._camera.rotation.y, 0, this._camera.rotation.w)
@@ -129,21 +136,21 @@ export class PlayerController extends Component {
     }
   }
 
-  private move(dt: number) {
-    let movementDistance = this._movementSpeed * dt;
+  private walk(deltaTime: number) {
+    let movementDistance = this._movementSpeed * deltaTime;
     this._movementDirection = this._gameInput.getInputDirection();
     this._movement = new Vec3(
       this._movementDirection.x * movementDistance,
-      (this._movementDirection.y = this._velocityY * dt),
+      (this._movementDirection.y = this._velocityY * deltaTime),
       this._movementDirection.z * movementDistance
     );
-    Vec3.transformQuat(this._movement, this._movement, this.node.rotation)
+    Vec3.transformQuat(this._movement, this._movement, this.node.rotation);
     this._characterController.move(this._movement);
   }
 
-  private applyGravity(dt: number) {
+  private applyGravity(deltaTime: number) {
     if (this._velocityY >= -200 && !this._isOnGround) {
-      this._velocityY += -this._gravity * dt;
+      this._velocityY += -this._gravity * deltaTime;
     }
   }
 
@@ -152,18 +159,26 @@ export class PlayerController extends Component {
     return this._isOnGround;
   }
 
-  private run() {
-    if (this._gameInput.getRunInput() && this._isOnGround) {
-      this._movementSpeed = this._runSpeed
-    } else {
-      this._movementSpeed = math.lerp(this._runSpeed, this._walkSpeed, 0.3);
+  private run(deltaTime: number) {
+    if (GameInput.getRunInput() && this._isOnGround) {
+      this._movementSpeed = this._runSpeed;
+    } else if (!this._isOnGround) {
+      this._movementSpeed = math.lerp(
+        this._movementSpeed,
+        this._walkSpeed,
+        0.7 * deltaTime
+      );
+    } else if (!GameInput.getRunInput() && this._isOnGround) {
+      this._movementSpeed = this._walkSpeed;
     }
     // console.log(this._movementSpeed);
   }
 
   private jump() {
-    if (this._gameInput.getJumpInput() && this._isOnGround) {
+    if (GameInput.getJumpInput() && this._isOnGround) {
       this._velocityY = this._jumpPower;
     }
   }
+
+  private changePlayerState() {}
 }

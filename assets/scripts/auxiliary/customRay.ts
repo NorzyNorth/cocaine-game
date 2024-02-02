@@ -42,7 +42,7 @@ export default class CustomRay {
   }
 
   diplay() {
-    console.log(`Big Dildo 1`);
+    // console.log(`Big Dildo 1`);
     const lineDrawer = this.node.getComponent(LineDrawer);
     if (lineDrawer) {
         lineDrawer.drawLine(this.from, this.to);
