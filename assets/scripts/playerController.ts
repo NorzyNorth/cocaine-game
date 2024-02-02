@@ -38,7 +38,7 @@ export class PlayerController extends Component {
   private _camera: Node;
   @property
   public _walkSpeed: number = 7;
-  public _runSpeed: number = 14;
+  public _runSpeed: number = 10;
   public _movementSpeed: number = this._walkSpeed;
 
   @property
@@ -61,7 +61,7 @@ export class PlayerController extends Component {
     // console.log(this._jumpPower);
     this.rotateBeforeMove();
     this.move(dt);
-    this.run();
+    this.run(dt);
     this.jump();
     // console.log(this._velocity);
   }
@@ -152,11 +152,13 @@ export class PlayerController extends Component {
     return this._isOnGround;
   }
 
-  private run() {
+  private run(dt: number) {
     if (this._gameInput.getRunInput() && this._isOnGround) {
       this._movementSpeed = this._runSpeed
-    } else {
-      this._movementSpeed = math.lerp(this._runSpeed, this._walkSpeed, 0.3);
+    } else if (!this._isOnGround) {
+      this._movementSpeed = math.lerp(this._movementSpeed, this._walkSpeed, 0.3 * dt);
+    } else if (!this._gameInput.getRunInput() && this._isOnGround) {
+      this._movementSpeed = this._walkSpeed
     }
     console.log(this._movementSpeed);
   }
