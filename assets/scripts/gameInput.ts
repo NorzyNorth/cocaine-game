@@ -98,11 +98,11 @@ export class GameInput {
     }
     if (
       GameInput._inputKeywordMap.has(32) &&
-      !GameInput._inputKeywordMap.has(17)
+      !GameInput._inputKeywordMap.has(16)
     ) {
       this._axis.y = 1;
     } else if (
-      GameInput._inputKeywordMap.has(17) &&
+      GameInput._inputKeywordMap.has(16) &&
       !GameInput._inputKeywordMap.has(32)
     ) {
       this._axis.y = -1;
