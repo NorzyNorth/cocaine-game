@@ -30,6 +30,7 @@ export enum _PlayerStateType {
 @ccclass("playerController")
 export class PlayerController extends Component {
   private _movementDirection: Vec3 = new Vec3(0, 0, 0);
+  private _hoverDirection: Vec3 = new Vec3(0, 0, 0);
   private _viewDirection: Vec3 = new Vec3(0, 0, 0);
   private _gameInput: GameInput;
   private _movement: Vec3;
@@ -67,12 +68,10 @@ export class PlayerController extends Component {
         this.applyFlyController(deltaTime);
         break;
     }
-
     // console.log(this._isOnGround);
     // console.log(this._velocityY);
     // console.log(this._jumpPower);
-
-    // console.log(this._velocity);
+    // console.log(this._movementSpeed);
   }
 
   private applyFlyController(deltaTime: number) {
@@ -156,26 +155,31 @@ export class PlayerController extends Component {
 
   private walk(deltaTime: number) {
     let movementDistance = this._movementSpeed * deltaTime;
+    console.log(movementDistance);
     this._movementDirection = this._gameInput.getInputDirection();
     this._movement = new Vec3(
       this._movementDirection.x * movementDistance,
       (this._movementDirection.y = this._velocityY * deltaTime),
       this._movementDirection.z * movementDistance
     );
+    console.log(this._movement);
     Vec3.transformQuat(this._movement, this._movement, this.node.rotation);
     this._characterController.move(this._movement);
   }
 
   private fly(deltaTime: number) {
     let movementDistance = this._flySpeed * deltaTime;
+    console.log(movementDistance);
     this._movementDirection = this._gameInput.getInputDirection();
+    this._hoverDirection = this._gameInput.getHoverInputDirection();
     this._movement = new Vec3(
       this._movementDirection.x * movementDistance,
-      this._movementDirection.y * movementDistance,
+      this._hoverDirection.y * movementDistance,
       this._movementDirection.z * movementDistance
     );
     Vec3.transformQuat(this._movement, this._movement, this.node.rotation);
     this._characterController.move(this._movement);
+    console.log(this._movement);
   }
 
   private applyGravity(deltaTime: number) {
@@ -216,5 +220,6 @@ export class PlayerController extends Component {
       this._playerState == _PlayerStateType.BASE
         ? _PlayerStateType.FLY
         : _PlayerStateType.BASE;
+    this._velocityY = 0;
   }
 }

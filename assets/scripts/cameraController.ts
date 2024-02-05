@@ -29,9 +29,13 @@ export class cameraController extends Component {
   private _cameraRay: CustomRay;
   private _fpsCamera: Node;
   private _tpsCamera: Node;
+  private _playerRoot: Node;
+  private _playerViual: Node;
   start() {
     this._fpsCamera = this.node.getChildByName("FPS Camera");
     this._tpsCamera = this.node.getChildByName("TPS Camera");
+    this._playerRoot = this.node.getParent();
+    this._playerViual = this._playerRoot.getChildByName("PlayerVisual");
     this._cameraInput = new CameraInput();
     this.applyCameraInput();
     this.castCameraRay();
@@ -103,15 +107,24 @@ export class cameraController extends Component {
   private switchView() {
     if (!GameInput.getSwitchViewInput()) return;
     if (this._tpsCamera.active === true && this._fpsCamera.active === false) {
-      this._tpsCamera.active = false;
-      this._fpsCamera.active = true;
+      this.switchToFPS();
     } else if (this._tpsCamera.active === false && this._fpsCamera.active === true) {
-      this._tpsCamera.active = true;
-      this._fpsCamera.active = false;
+      this.switchToTPS();
     } else {
-      this._tpsCamera.active = false;
-      this._fpsCamera.active = true;
+      this.switchToTPS();
     }
+  }
+
+  private switchToFPS() {
+    this._tpsCamera.active = false;
+    this._fpsCamera.active = true;
+    this._playerViual.active = false;
+  }
+
+  private switchToTPS() {
+    this._tpsCamera.active = true;
+    this._fpsCamera.active = false;
+    this._playerViual.active = true;
   }
 
   private scrollCamera(event: EventMouse) {
@@ -125,8 +138,7 @@ export class cameraController extends Component {
             this._tpsCamera.position.z
           );
         } else if (this._tpsCamera.position.x > -2) {
-          this._tpsCamera.active = false;
-          this._fpsCamera.active = true;
+          this.switchToFPS();
         }
       } else if (scrollY < 0) {
         if (this._tpsCamera.position.x > -5) {
@@ -144,8 +156,7 @@ export class cameraController extends Component {
           this._tpsCamera.position.y,
           this._tpsCamera.position.z
         );
-        this._fpsCamera.active = false;
-        this._tpsCamera.active = true;
+        this.switchToTPS();
       }
     }
   }

@@ -21,7 +21,8 @@ export class GameInput {
     y: 0,
   };
   private _axis = { x: 0, y: 0, z: 0 };
-  private _inputDirection: Vec3;
+  private _inputDirection: Vec3 = Vec3.ZERO;
+  private _hoverDirection: Vec3 = Vec3.ZERO;
   private _inputType: _InputType = _InputType.MOVEMENT;
   constructor(type?: _InputType) {
     type ? (this._inputType = type) : null;
@@ -48,7 +49,7 @@ export class GameInput {
     if (type === InputMouseEventType.MOVE) this.onMouseMove(event);
     // console.log(this._inputMouseMap);
   }
-  
+
   onMouseDown(event: EventMouse) {
     this._inputMouseMap.add(event.getButton());
     // console.log(event)
@@ -101,6 +102,13 @@ export class GameInput {
     } else {
       this._axis.z = 0;
     }
+    this._inputDirection = new Vec3(this._axis.x, this._axis.y, this._axis.z);
+    this._inputDirection.normalize();
+
+    return this._inputDirection;
+  }
+
+  getHoverInputDirection(): Vec3 {
     if (
       GameInput._inputKeywordMap.has(32) &&
       !GameInput._inputKeywordMap.has(16)
@@ -114,10 +122,10 @@ export class GameInput {
     } else {
       this._axis.y = 0;
     }
-    this._inputDirection = new Vec3(this._axis.x, this._axis.y, this._axis.z);
-    this._inputDirection.normalize();
+    this._hoverDirection = new Vec3(this._axis.x, this._axis.y, this._axis.z);
+    this._hoverDirection.normalize();
 
-    return this._inputDirection;
+    return this._hoverDirection;
   }
 
   static getMovementInput(): boolean {
