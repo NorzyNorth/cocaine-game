@@ -41,6 +41,7 @@ export class PlayerController extends Component {
   @property
   public _walkSpeed: number = 7;
   public _runSpeed: number = 10;
+  public _flySpeed: number = 10;
   public _movementSpeed: number = this._walkSpeed;
 
   @property
@@ -76,6 +77,9 @@ export class PlayerController extends Component {
 
   private applyFlyController(deltaTime: number) {
     this.switchFlyMode();
+    this.rotateBeforeMove();
+    this.fly(deltaTime);
+
   }
 
   private applyBasicController(deltaTime: number) {
@@ -162,6 +166,18 @@ export class PlayerController extends Component {
     this._characterController.move(this._movement);
   }
 
+  private fly(deltaTime: number) {
+    let movementDistance = this._flySpeed * deltaTime;
+    this._movementDirection = this._gameInput.getInputDirection();
+    this._movement = new Vec3(
+      this._movementDirection.x * movementDistance,
+      this._movementDirection.y * movementDistance,
+      this._movementDirection.z * movementDistance
+    );
+    Vec3.transformQuat(this._movement, this._movement, this.node.rotation);
+    this._characterController.move(this._movement);
+  }
+
   private applyGravity(deltaTime: number) {
     if (this._velocityY >= -200 && !this._isOnGround) {
       this._velocityY += -this._gravity * deltaTime;
@@ -200,5 +216,10 @@ export class PlayerController extends Component {
       this._playerState == _PlayerStateType.BASE
         ? _PlayerStateType.FLY
         : _PlayerStateType.BASE;
+  }
+
+  private switchView() {
+    if (!GameInput.getSwitchViewInput()) return;
+
   }
 }

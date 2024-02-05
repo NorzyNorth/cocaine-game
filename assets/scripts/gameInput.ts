@@ -96,6 +96,19 @@ export class GameInput {
     } else {
       this._axis.z = 0;
     }
+    if (
+      GameInput._inputKeywordMap.has(32) &&
+      !GameInput._inputKeywordMap.has(17)
+    ) {
+      this._axis.y = 1;
+    } else if (
+      GameInput._inputKeywordMap.has(17) &&
+      !GameInput._inputKeywordMap.has(32)
+    ) {
+      this._axis.y = -1;
+    } else {
+      this._axis.y = 0;
+    }
     this._inputDirection = new Vec3(this._axis.x, this._axis.y, this._axis.z);
     this._inputDirection.normalize();
 
@@ -130,14 +143,29 @@ export class GameInput {
   
   static getSwitchToFlyInput(): boolean {
     if (
-      GameInput._inputKeywordMap.has(86) &&
+      GameInput._inputKeywordMap.has(72) &&
       !GameInput._isSwitchToFlyPressed
     ) {
       GameInput._isSwitchToFlyPressed = true;
       return true;
     }
-    if (!GameInput._inputKeywordMap.has(86))
+    if (!GameInput._inputKeywordMap.has(72))
       GameInput._isSwitchToFlyPressed = false;
+    return false;
+  }
+
+  private static _isSwitchViewPressed: boolean = false;
+  
+  static getSwitchViewInput(): boolean {
+    if (
+      GameInput._inputKeywordMap.has(86) &&
+      !GameInput._isSwitchViewPressed
+    ) {
+      GameInput._isSwitchViewPressed = true;
+      return true;
+    }
+    if (!GameInput._inputKeywordMap.has(86))
+      GameInput._isSwitchViewPressed = false;
     return false;
   }
 }
