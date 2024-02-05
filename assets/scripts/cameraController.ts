@@ -1,17 +1,16 @@
 import {
   _decorator,
   Component,
-  Node,
   input as engineInput,
   Input as EngineInput,
   EventMouse,
   EventKeyboard,
   Vec3,
-  geometry,
-  PhysicsSystem,
+  Node,
 } from "cc";
 import { CameraInput, _ScrollDirectionType } from "./cameraInput";
 import CustomRay from "./auxiliary/customRay";
+import { GameInput } from "./gameInput";
 const { ccclass, property } = _decorator;
 
 export enum InputKeywordEventType {
@@ -28,18 +27,23 @@ export class cameraController extends Component {
   private _cameraInput: CameraInput;
   private _cameraScrollSensivity: number = 0.3;
   private _cameraRay: CustomRay;
+  private _fpsCamera: Node;
+  private _tpsCamera: Node;
   start() {
+    this._fpsCamera = this.node.getChildByName("FPS Camera");
+    this._tpsCamera = this.node.getChildByName("TPS Camera");
     this._cameraInput = new CameraInput();
     this.applyCameraInput();
     this.castCameraRay();
   }
 
   update(deltaTime: number) {
+    this.switchView();
     // this.updateCameraRay();
     // this.checkCameraRayHit();
-    // console.log(`node pos ${this.node.getPosition()}`);
+    // console.log(`node pos ${this._tpsCamera.getPosition()}`);
     // console.log();
-    this.updateCameraRay();
+    // this.updateCameraRay();
     // console.log(this._cameraRay.hasHit());
   }
 
@@ -63,30 +67,30 @@ export class cameraController extends Component {
   }
 
   private castCameraRay() {
-    this._cameraRay = new CustomRay(this.node, new Vec3(), new Vec3());
+    this._cameraRay = new CustomRay(this._tpsCamera, new Vec3(), new Vec3());
   }
 
   private updateCameraRay() {
     const fromWorld = new Vec3();
     const toWorld = new Vec3();
-    this.node.getWorldPosition(fromWorld);
-    const parentNode = this.node.getParent()
+    this._tpsCamera.getWorldPosition(fromWorld);
+    const parentNode = this._tpsCamera.getParent();
     parentNode.getWorldPosition(toWorld);
     // console.log(parentNode);
-    
+
     this._cameraRay.update(fromWorld, toWorld);
   }
 
   // private updateCameraRay() {
   //   this._cameraRay.o = new Vec3(
-  //     this.node.position.x,
-  //     this.node.position.y,
-  //     this.node.position.z
+  //     this._tpsCamera.position.x,
+  //     tthis._tpsCamera.position.y,
+  //     this._tpsCamera.position.z
   //   );
   //   this._cameraRay.d = new Vec3(
-  //     this.node.position.x - this.node.position.x,
-  //     this.node.position.y - this.node.position.y,
-  //     this.node.position.z - this.node.position.z
+  //     this._tpsCamera.position.x - this._tpsCamera.position.x,
+  //     this._tpsCamera.position.y - this._tpsCamera.position.y,
+  //     this._tpsCamera.position.z - this._tpsCamera.position.z
   //   );
   // }
 
@@ -96,23 +100,39 @@ export class cameraController extends Component {
   //   }
   // }
 
-  scrollCamera(event: EventMouse) {
+  private switchView() {
+    if (!GameInput.getSwitchViewInput()) return;
+    if (this._tpsCamera.active === true && this._fpsCamera.active === false) {
+      this._tpsCamera.active = false;
+      this._fpsCamera.active = true;
+    } else if (this._tpsCamera.active === false && this._fpsCamera.active === true) {
+      this._tpsCamera.active = true;
+      this._fpsCamera.active = false;
+    } else {
+      this._tpsCamera.active = false;
+      this._fpsCamera.active = true;
+    }
+  }
+
+  private scrollCamera(event: EventMouse) {
     const scrollY = event.getScrollY();
-    if (scrollY > 0) {
-      if (this.node.position.x < -2) {
-        this.node.position = new Vec3(
-          this.node.position.x + this._cameraScrollSensivity,
-          this.node.position.y,
-          this.node.position.z
-        );
-      }
-    } else if (scrollY < 0) {
-      if (this.node.position.x > -5) {
-        this.node.position = new Vec3(
-          this.node.position.x - this._cameraScrollSensivity,
-          this.node.position.y,
-          this.node.position.z
-        );
+    if (this._tpsCamera.active === true){
+      if (scrollY > 0) {
+        if (this._tpsCamera.position.x < -2) {
+          this._tpsCamera.position = new Vec3(
+            this._tpsCamera.position.x + this._cameraScrollSensivity,
+            this._tpsCamera.position.y,
+            this._tpsCamera.position.z
+          );
+        }
+      } else if (scrollY < 0) {
+        if (this._tpsCamera.position.x > -5) {
+          this._tpsCamera.position = new Vec3(
+            this._tpsCamera.position.x - this._cameraScrollSensivity,
+            this._tpsCamera.position.y,
+            this._tpsCamera.position.z
+          );
+        }
       }
     }
   }

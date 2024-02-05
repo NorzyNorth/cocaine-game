@@ -48,14 +48,17 @@ export class GameInput {
     if (type === InputMouseEventType.MOVE) this.onMouseMove(event);
     // console.log(this._inputMouseMap);
   }
+  
   onMouseDown(event: EventMouse) {
     this._inputMouseMap.add(event.getButton());
     // console.log(event)
     game.canvas.requestPointerLock();
   }
+
   onMouseUp(event: EventMouse) {
     this._inputMouseMap.delete(event.getButton());
   }
+
   onMouseMove(event: EventMouse) {
     // console.log(`locationX => ${event.getLocationX()}`);
     // console.log(`locationY => ${event.getLocationY()}`);
@@ -63,12 +66,14 @@ export class GameInput {
     this._mouseDirection.y = event.movementY;
     // console.log(`${event.movementX}  ${event.movementY}`)
   }
+
   getMouseDirection() {
     return {
       x: this._mouseDirection.x,
       y: this._mouseDirection.y,
     };
   }
+
   getInputDirection(): Vec3 {
     if (
       GameInput._inputKeywordMap.has(87) &&
@@ -140,7 +145,7 @@ export class GameInput {
   }
 
   private static _isSwitchToFlyPressed: boolean = false;
-  
+
   static getSwitchToFlyInput(): boolean {
     if (
       GameInput._inputKeywordMap.has(72) &&
@@ -155,12 +160,9 @@ export class GameInput {
   }
 
   private static _isSwitchViewPressed: boolean = false;
-  
+
   static getSwitchViewInput(): boolean {
-    if (
-      GameInput._inputKeywordMap.has(86) &&
-      !GameInput._isSwitchViewPressed
-    ) {
+    if (GameInput._inputKeywordMap.has(86) && !GameInput._isSwitchViewPressed) {
       GameInput._isSwitchViewPressed = true;
       return true;
     }

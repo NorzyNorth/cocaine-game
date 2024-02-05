@@ -217,9 +217,4 @@ export class PlayerController extends Component {
         ? _PlayerStateType.FLY
         : _PlayerStateType.BASE;
   }
-
-  private switchView() {
-    if (!GameInput.getSwitchViewInput()) return;
-
-  }
 }
