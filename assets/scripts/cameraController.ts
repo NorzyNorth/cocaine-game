@@ -116,7 +116,7 @@ export class cameraController extends Component {
 
   private scrollCamera(event: EventMouse) {
     const scrollY = event.getScrollY();
-    if (this._tpsCamera.active === true){
+    if (this._tpsCamera.active === true && this._fpsCamera.active === false){
       if (scrollY > 0) {
         if (this._tpsCamera.position.x < -2) {
           this._tpsCamera.position = new Vec3(
@@ -124,6 +124,9 @@ export class cameraController extends Component {
             this._tpsCamera.position.y,
             this._tpsCamera.position.z
           );
+        } else if (this._tpsCamera.position.x > -2) {
+          this._tpsCamera.active = false;
+          this._fpsCamera.active = true;
         }
       } else if (scrollY < 0) {
         if (this._tpsCamera.position.x > -5) {
@@ -133,6 +136,16 @@ export class cameraController extends Component {
             this._tpsCamera.position.z
           );
         }
+      }
+    } else if (this._fpsCamera.active == true && this._tpsCamera.active === false){
+      if (scrollY < 0) {
+        this._tpsCamera.position = new Vec3(
+          -2.1,
+          this._tpsCamera.position.y,
+          this._tpsCamera.position.z
+        );
+        this._fpsCamera.active = false;
+        this._tpsCamera.active = true;
       }
     }
   }
