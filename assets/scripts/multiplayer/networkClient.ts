@@ -2,6 +2,7 @@ import { _decorator, Component, Node, sys, Vec3 } from "cc";
 const { ccclass, property } = _decorator;
 import io from "socket.io-client/dist/socket.io.js";
 import { Socket } from "socket.io-client";
+import { renderMultiplayer } from "./renderMultiplayer";
 class Player {
   uuid: string;
   x: number = 0;
@@ -102,12 +103,15 @@ export class networkClient extends Component {
       this.preLastPosition.y = fUpdate.y
       this.preLastPosition.z = fUpdate.z
     }
+    this.renderPlayers()
   }
 
   protected renderPlayers() {
     for (const player of this.players) {
       if (!player.rendered) {
-        
+        console.log('keke da meme')
+        const renderMultiplayer1 = new renderMultiplayer()
+        renderMultiplayer1.executeCode()
       }
     }
   }
