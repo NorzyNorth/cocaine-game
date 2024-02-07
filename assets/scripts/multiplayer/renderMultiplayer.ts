@@ -5,12 +5,16 @@ const { ccclass, property } = _decorator;
 export class renderMultiplayer extends Component {
     @property({ type: Prefab })
     modelPrefab: Prefab = null;
-
+    start() {
+        this.executeCode();
+    }
     executeCode() {
         if (!this.modelPrefab) {
-            this.loadPrefabFromURL('https://example.com/path/to/prefab.prefab')
+            this.loadPrefabFromURL('https://s3.timeweb.com/466b5258-a96bb5a0-7ffe-42b3-93e5-dd669d0f8f00/Player-blue.prefab')
                 .then((prefab: Prefab) => {
                     this.modelPrefab = prefab;
+                    console.log(this.modelPrefab);
+                    
                     this.createModel();
                 })
                 .catch((error: Error) => {
