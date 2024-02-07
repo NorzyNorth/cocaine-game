@@ -24,6 +24,7 @@ interface UpdateData {
   x: number;
   y: number;
   z: number;
+  uuid: string
 }
 
 @ccclass("networkClient")
@@ -32,6 +33,7 @@ export class networkClient extends Component {
     x: 0,
     y: 0,
     z: 0,
+    uuid: '0'
   };
   socket?: Socket = null;
   private players : Player[] = []
@@ -49,8 +51,21 @@ export class networkClient extends Component {
     } else {
       console.log("Running in native context");
     }
-    this.socket.on("playerUpdated", (info : UpdateData) => {
-      // console.log(info)
+    this.socket.on("playerUpdated", (info) => {
+      const index = this.players.findIndex((player) => player.uuid === info.uuid);
+      if (index !== -1 && this.players[index]) {
+        const bufInfo : UpdateData = {
+          x: info.x,
+          y: info.y,
+          z: info.z,
+          uuid: this.socket.id
+        }
+        this.players[index].x =info.x
+        this.players[index].y =info.y
+        this.players[index].z =info.z
+        console.log(this.players[index])
+      }
+      
     })
     this.socket.on("playerConnected", (player) => {
       this.players = []
@@ -74,6 +89,7 @@ export class networkClient extends Component {
       x: positionPlayer.x,
       y: positionPlayer.y,
       z: positionPlayer.z,
+      uuid: this.socket.id
     };
     if (
       Math.floor(fUpdate.x) == Math.floor(this.preLastPosition.x) &&
