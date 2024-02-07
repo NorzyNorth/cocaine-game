@@ -155,21 +155,21 @@ export class PlayerController extends Component {
 
   private walk(deltaTime: number) {
     let movementDistance = this._movementSpeed * deltaTime;
-    console.log(movementDistance);
+    // console.log(movementDistance);
     this._movementDirection = this._gameInput.getInputDirection();
     this._movement = new Vec3(
       this._movementDirection.x * movementDistance,
       (this._movementDirection.y = this._velocityY * deltaTime),
       this._movementDirection.z * movementDistance
     );
-    console.log(this._movement);
+    // console.log(this._movement);
     Vec3.transformQuat(this._movement, this._movement, this.node.rotation);
     this._characterController.move(this._movement);
   }
 
   private fly(deltaTime: number) {
     let movementDistance = this._flySpeed * deltaTime;
-    console.log(movementDistance);
+    // console.log(movementDistance);
     this._movementDirection = this._gameInput.getInputDirection();
     this._hoverDirection = this._gameInput.getHoverInputDirection();
     this._movement = new Vec3(
@@ -179,7 +179,7 @@ export class PlayerController extends Component {
     );
     Vec3.transformQuat(this._movement, this._movement, this.node.rotation);
     this._characterController.move(this._movement);
-    console.log(this._movement);
+    // console.log(this._movement);
   }
 
   private applyGravity(deltaTime: number) {
