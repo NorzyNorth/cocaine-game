@@ -6,7 +6,7 @@ export class renderMultiplayer extends Component {
     @property({ type: Prefab })
     modelPrefab: Prefab = null;
     start() {
-        this.executeCode();
+        this.node = this.node
     }
     executeCode() {
         if (!this.modelPrefab) {
@@ -38,8 +38,8 @@ export class renderMultiplayer extends Component {
     }
 
     createModel() {
-        const emptyNode = new Node('EmptyNode');
-        this.node.addChild(emptyNode);
+        const emptyNode = new Node('kekemode');
+        this.node.getParent().addChild(emptyNode);
 
         if (this.modelPrefab) {
             const modelNode = instantiate(this.modelPrefab);

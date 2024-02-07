@@ -25,7 +25,7 @@ interface UpdateData {
   x: number;
   y: number;
   z: number;
-  uuid: string
+  uuid: string;
 }
 
 @ccclass("networkClient")
@@ -34,10 +34,10 @@ export class networkClient extends Component {
     x: 0,
     y: 0,
     z: 0,
-    uuid: '0'
+    uuid: "0",
   };
   socket?: Socket = null;
-  private players : Player[] = []
+  private players: Player[] = [];
   onLoad() {
     console.log("Loading io...");
     if (!sys.isNative) {
@@ -53,33 +53,38 @@ export class networkClient extends Component {
       console.log("Running in native context");
     }
     this.socket.on("playerUpdated", (info) => {
-      const index = this.players.findIndex((player) => player.uuid === info.uuid);
+      const index = this.players.findIndex(
+        (player) => player.uuid === info.uuid
+      );
       if (index !== -1 && this.players[index]) {
-        const bufInfo : UpdateData = {
+        const bufInfo: UpdateData = {
           x: info.x,
           y: info.y,
           z: info.z,
-          uuid: this.socket.id
-        }
-        this.players[index].x =info.x
-        this.players[index].y =info.y
-        this.players[index].z =info.z
-        console.log(this.players[index])
+          uuid: this.socket.id,
+        };
+        this.players[index].x = info.x;
+        this.players[index].y = info.y;
+        this.players[index].z = info.z;
+        console.log(this.players[index]);
       }
-      
-    })
+    });
     this.socket.on("playerConnected", (player) => {
-      this.players = []
-      this.players.push(...player)
-      const index = this.players.findIndex((myPlayer) => this.socket.id === myPlayer.uuid);
+      this.players = [];
+      this.players.push(...player);
+      const index = this.players.findIndex(
+        (myPlayer) => this.socket.id === myPlayer.uuid
+      );
       this.players.splice(index, 1);
-      console.log(this.players)
-    })
+      console.log(this.players);
+    });
     this.socket.on("playerDisconnected", (player) => {
-      const index = this.players.findIndex((myPlayer) => player.uuid === myPlayer.uuid);
+      const index = this.players.findIndex(
+        (myPlayer) => player.uuid === myPlayer.uuid
+      );
       this.players.splice(index, 1);
       // console.log(this.players)
-    })
+    });
   }
   protected update(dt: number): void {
     const pahan = this.node.getParent();
@@ -90,7 +95,7 @@ export class networkClient extends Component {
       x: positionPlayer.x,
       y: positionPlayer.y,
       z: positionPlayer.z,
-      uuid: this.socket.id
+      uuid: this.socket.id,
     };
     if (
       Math.floor(fUpdate.x) == Math.floor(this.preLastPosition.x) &&
@@ -99,19 +104,23 @@ export class networkClient extends Component {
     ) {
     } else {
       this.socket.emit("updateData", fUpdate);
-      this.preLastPosition.x = fUpdate.x
-      this.preLastPosition.y = fUpdate.y
-      this.preLastPosition.z = fUpdate.z
+      this.preLastPosition.x = fUpdate.x;
+      this.preLastPosition.y = fUpdate.y;
+      this.preLastPosition.z = fUpdate.z;
     }
-    this.renderPlayers()
+    console.log(this.players);
+
+    this.renderPlayers();
   }
 
   protected renderPlayers() {
+    if (!this.players.length) return;
     for (const player of this.players) {
       if (!player.rendered) {
-        console.log('keke da meme')
-        const renderMultiplayer1 = new renderMultiplayer()
-        renderMultiplayer1.executeCode()
+        console.log("keke da meme");
+        const renderMultiplayer1 = new renderMultiplayer();
+        renderMultiplayer1.executeCode();
+        player.rendered = true;
       }
     }
   }
