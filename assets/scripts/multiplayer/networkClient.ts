@@ -8,6 +8,8 @@ class Player {
   y: number = 0;
   z: number = 0;
 
+  rendered: boolean = false;
+
   constructor(socketInfo: Socket) {
     this.uuid = socketInfo.id;
   }
@@ -83,6 +85,14 @@ export class networkClient extends Component {
       this.preLastPosition.x = fUpdate.x
       this.preLastPosition.y = fUpdate.y
       this.preLastPosition.z = fUpdate.z
+    }
+  }
+
+  protected renderPlayers() {
+    for (const player of this.players) {
+      if (!player.rendered) {
+        
+      }
     }
   }
 }
