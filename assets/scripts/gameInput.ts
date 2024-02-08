@@ -178,4 +178,16 @@ export class GameInput {
       GameInput._isSwitchViewPressed = false;
     return false;
   }
+
+  private static _isFAQPressed: boolean = false;
+
+  static getFAQInput(): boolean {
+    if (GameInput._inputKeywordMap.has(112) && !GameInput._isFAQPressed) {
+      GameInput._isFAQPressed = true;
+      return true;
+    }
+    if (!GameInput._inputKeywordMap.has(112))
+      GameInput._isFAQPressed = false;
+    return false;
+  }
 }
