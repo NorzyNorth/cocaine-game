@@ -47,7 +47,7 @@ export class networkClient extends Component {
       });
 
       this.socket.on("connect_error", (e) => {
-        console.log(`Connection Error: ${e}`);
+        // console.log(`Connection Error: ${e}`);
       });
     } else {
       console.log("Running in native context");
@@ -108,7 +108,7 @@ export class networkClient extends Component {
       this.preLastPosition.y = fUpdate.y;
       this.preLastPosition.z = fUpdate.z;
     }
-    console.log(this.players);
+    // console.log(this.players);
 
     this.renderPlayers();
   }
