@@ -10,6 +10,10 @@ import {
   Node,
   math,
   Quat,
+  Prefab,
+  resources,
+  instantiate,
+  director,
 } from "cc";
 import { GameInput, _InputType } from "./gameInput";
 const { ccclass, property } = _decorator;
@@ -88,6 +92,7 @@ export class PlayerController extends Component {
     this.walk(deltaTime);
     this.run(deltaTime);
     this.jump();
+    this.createObject();
   }
 
   private cameraRotate(event: EventMouse) {
@@ -221,5 +226,13 @@ export class PlayerController extends Component {
         ? _PlayerStateType.FLY
         : _PlayerStateType.BASE;
     this._velocityY = 0;
+  }
+
+  private createObject() {
+    if (!GameInput.getJumpInput()) return
+    resources.load("player-blue/player-blue", Prefab, (err, prefab) => {
+      const newObject = instantiate(prefab);
+      director.getScene().addChild(newObject);
+    })
   }
 }
