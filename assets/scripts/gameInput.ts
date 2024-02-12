@@ -14,6 +14,8 @@ export enum _InputType {
 }
 
 export class GameInput {
+  lockedMouse = false;
+
   private static _inputKeywordMap;
   private _inputMouseMap;
   private _mouseDirection = {
@@ -24,11 +26,13 @@ export class GameInput {
   private _inputDirection: Vec3 = Vec3.ZERO;
   private _hoverDirection: Vec3 = Vec3.ZERO;
   private _inputType: _InputType = _InputType.MOVEMENT;
+
   constructor(type?: _InputType) {
     type ? (this._inputType = type) : null;
     GameInput._inputKeywordMap = new Set();
     this._inputMouseMap = new Set();
   }
+
   getButton(event: EventKeyboard, type: InputKeywordEventType) {
     if (type === InputKeywordEventType.DOWN) this.onKeyDown(event);
     if (type === InputKeywordEventType.UP) this.onKeyUp(event);
@@ -44,16 +48,33 @@ export class GameInput {
   // 2 - pkm
   // 1 - koleco
   getMouse(event: EventMouse, type: InputMouseEventType) {
+    // if (this.enable) {
     if (type === InputMouseEventType.UP) this.onMouseUp(event);
     if (type === InputMouseEventType.DOWN) this.onMouseDown(event);
     if (type === InputMouseEventType.MOVE) this.onMouseMove(event);
+    // }
     // console.log(this._inputMouseMap);
+  }
+
+  registerLockMouse() {
+    document.addEventListener("pointerlockchange", () => {
+      if (document.pointerLockElement === game.canvas) {
+        this.lockedMouse = true;
+      } else {
+        this.lockedMouse = false;
+      }
+    }, false);
+  }
+
+  lockMouse() {
+    if (!this.lockedMouse) {
+      game.canvas.requestPointerLock();
+    }
   }
 
   onMouseDown(event: EventMouse) {
     this._inputMouseMap.add(event.getButton());
     // console.log(event)
-    game.canvas.requestPointerLock();
   }
 
   onMouseUp(event: EventMouse) {

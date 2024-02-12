@@ -12,6 +12,7 @@ import {
   Quat,
 } from "cc";
 import { GameInput, _InputType } from "./gameInput";
+import { MainUI } from "./ui/MainUI";
 const { ccclass, property } = _decorator;
 
 export enum InputKeywordEventType {
@@ -50,7 +51,13 @@ export class PlayerController extends Component {
 
   public _jumpPower: number = 5;
 
+  @property({ visible: true, type: Node })
+  public mainUI: Node;
+  private mainUIComponent: MainUI;
+
   protected start(): void {
+    this.mainUIComponent = this.mainUI.getComponent(MainUI);
+
     this._gameInput = new GameInput();
     this._camera = this.node.getChildByName("CameraNode");
     this._characterController = this.node.getComponent(CharacterController);
@@ -122,6 +129,7 @@ export class PlayerController extends Component {
     this.applyKeywordGameInput();
     this.applyMouseGameInput();
   }
+
   private applyKeywordGameInput(): void {
     engineInput.on(EngineInput.EventType.KEY_DOWN, (event: EventKeyboard) =>
       this._gameInput.getButton(event, InputKeywordEventType.DOWN)
@@ -132,12 +140,22 @@ export class PlayerController extends Component {
   }
 
   private applyMouseGameInput() {
+    this._gameInput.registerLockMouse();
+
     engineInput.on(EngineInput.EventType.MOUSE_MOVE, (event: EventMouse) => {
-      this.cameraRotate(event);
+      if (this._gameInput.lockedMouse) {
+        this.cameraRotate(event);
+      }
     });
+
     engineInput.on(EngineInput.EventType.MOUSE_DOWN, (event: EventMouse) => {
       this._gameInput.getMouse(event, InputMouseEventType.DOWN);
+
+      if (this.mainUIComponent.ready) {
+        this._gameInput.lockMouse();
+      }
     });
+
     engineInput.on(EngineInput.EventType.MOUSE_UP, (event: EventMouse) => {
       this._gameInput.getMouse(event, InputMouseEventType.UP);
     });
