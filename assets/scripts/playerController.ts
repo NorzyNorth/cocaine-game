@@ -99,7 +99,7 @@ export class PlayerController extends Component {
     this.walk(deltaTime);
     this.run(deltaTime);
     this.jump();
-    this.createObject();
+    // this.createObject();
   }
 
   private cameraRotate(event: EventMouse) {
@@ -246,11 +246,11 @@ export class PlayerController extends Component {
     this._velocityY = 0;
   }
 
-  private createObject() {
-    if (!GameInput.getJumpInput()) return
-    resources.load("player-blue/player-blue", Prefab, (err, prefab) => {
-      const newObject = instantiate(prefab);
-      director.getScene().addChild(newObject);
-    })
-  }
+  // private createObject() {
+  //   if (!GameInput.getJumpInput()) return
+  //   resources.load("player-blue/player-blue", Prefab, (err, prefab) => {
+  //     const newObject = instantiate(prefab);
+  //     director.getScene().addChild(newObject);
+  //   })
+  // }
 }
