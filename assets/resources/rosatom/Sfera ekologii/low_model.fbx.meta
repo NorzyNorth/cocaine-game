@@ -1,0 +1,591 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88",
+  "files": [],
+  "subMetas": {
+    "27038": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@27038",
+      "displayName": "",
+      "id": "27038",
+      "name": "alpha_texture-2.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Opacity.png"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "37284": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@37284",
+      "displayName": "",
+      "id": "37284",
+      "name": "normalmap_texture-1.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Normal_DirectX.png"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1dcb4": {
+      "importer": "gltf-mesh",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@1dcb4",
+      "displayName": "",
+      "id": "1dcb4",
+      "name": "Mesh.017.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 1794
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c00d1": {
+      "importer": "gltf-mesh",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@c00d1",
+      "displayName": "",
+      "id": "c00d1",
+      "name": "defaultMaterial.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 2254
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "41a92": {
+      "importer": "gltf-mesh",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@41a92",
+      "displayName": "",
+      "id": "41a92",
+      "name": "defaultMaterial.001.mesh",
+      "userData": {
+        "gltfIndex": 2,
+        "triangleCount": 38066
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ae166": {
+      "importer": "gltf-mesh",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@ae166",
+      "displayName": "",
+      "id": "ae166",
+      "name": "defaultMaterial.002.mesh",
+      "userData": {
+        "gltfIndex": 3,
+        "triangleCount": 15362
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c83b2": {
+      "importer": "gltf-embeded-image",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@c83b2",
+      "displayName": "",
+      "id": "c83b2",
+      "name": "base_color_texture-12.image",
+      "userData": {
+        "gltfIndex": 12,
+        "fixAlphaTransparencyArtifacts": true,
+        "hasAlpha": true,
+        "type": "texture"
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
+    "0a1ef": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@0a1ef",
+      "displayName": "",
+      "id": "0a1ef",
+      "name": "base_color_texture-0.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Base_color.png"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4ebe7": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@4ebe7",
+      "displayName": "",
+      "id": "4ebe7",
+      "name": "roughness_texture-3.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Roughness.png"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1dfd4": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@1dfd4",
+      "displayName": "",
+      "id": "1dfd4",
+      "name": "metallic_texture-4.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Metallic.png"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9e7e2": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@9e7e2",
+      "displayName": "",
+      "id": "9e7e2",
+      "name": "base_color_texture-5.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b1d68": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@b1d68",
+      "displayName": "",
+      "id": "b1d68",
+      "name": "normalmap_texture-6.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6406a": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@6406a",
+      "displayName": "",
+      "id": "6406a",
+      "name": "alpha_texture-7.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e22db": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@e22db",
+      "displayName": "",
+      "id": "e22db",
+      "name": "emission_color_texture-8.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e76d9": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@e76d9",
+      "displayName": "",
+      "id": "e76d9",
+      "name": "base_color_texture-9.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9a5db": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@9a5db",
+      "displayName": "",
+      "id": "9a5db",
+      "name": "normalmap_texture-10.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3ec18": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@3ec18",
+      "displayName": "",
+      "id": "3ec18",
+      "name": "emission_color_texture-11.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "dcebe": {
+      "importer": "texture",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@dcebe",
+      "displayName": "",
+      "id": "dcebe",
+      "name": "base_color_texture-12.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "cf28992a-e154-4e13-b620-c5df2fecfb88@c83b2"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "8a641": {
+      "importer": "gltf-material",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@8a641",
+      "displayName": "",
+      "id": "8a641",
+      "name": "Material #59.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "56ce1": {
+      "importer": "gltf-material",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@56ce1",
+      "displayName": "",
+      "id": "56ce1",
+      "name": "glass.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "707b8": {
+      "importer": "gltf-material",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@707b8",
+      "displayName": "",
+      "id": "707b8",
+      "name": "BOT2.material",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "363d9": {
+      "importer": "gltf-material",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@363d9",
+      "displayName": "",
+      "id": "363d9",
+      "name": "BOT1.material",
+      "userData": {
+        "gltfIndex": 3
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e34f1": {
+      "importer": "gltf-scene",
+      "uuid": "cf28992a-e154-4e13-b620-c5df2fecfb88@e34f1",
+      "displayName": "",
+      "id": "e34f1",
+      "name": "low_model.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "base_color_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Base_color.png"
+      },
+      {
+        "name": "normalmap_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Normal_DirectX.png"
+      },
+      {
+        "name": "alpha_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Opacity.png"
+      },
+      {
+        "name": "roughness_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Roughness.png"
+      },
+      {
+        "name": "metallic_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii/tex_stend/Material _59_Metallic.png"
+      },
+      {
+        "name": "base_color_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      {
+        "name": "normalmap_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      {
+        "name": "alpha_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      {
+        "name": "emission_color_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      {
+        "name": "base_color_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      {
+        "name": "normalmap_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      {
+        "name": "emission_color_texture",
+        "uri": "db://assets/resources/rosatom/Sfera ekologii"
+      },
+      {
+        "name": "base_color_texture",
+        "uri": "cf28992a-e154-4e13-b620-c5df2fecfb88@c83b2"
+      }
+    ],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "cf28992a-e154-4e13-b620-c5df2fecfb88@e34f1",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@1dcb4",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@c00d1",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@41a92",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@ae166"
+      ],
+      "skeletons": [],
+      "textures": [
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@0a1ef",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@37284",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@27038",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@4ebe7",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@1dfd4",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@9e7e2",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@b1d68",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@6406a",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@e22db",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@e76d9",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@9a5db",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@3ec18",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@dcebe"
+      ],
+      "materials": [
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@8a641",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@56ce1",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@707b8",
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@363d9"
+      ],
+      "scenes": [
+        "cf28992a-e154-4e13-b620-c5df2fecfb88@e34f1"
+      ]
+    }
+  }
+}

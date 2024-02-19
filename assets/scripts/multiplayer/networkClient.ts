@@ -3,6 +3,7 @@ const { ccclass, property } = _decorator;
 import io from "socket.io-client/dist/socket.io.js";
 import { Socket } from "socket.io-client";
 import { renderMultiplayer } from "./renderMultiplayer";
+
 class Player {
   uuid: string;
   x: number = 0;
@@ -46,11 +47,12 @@ export class networkClient extends Component {
   socket?: Socket = null;
   private players: Player[] = [];
   private renderMultiplayer1 = new renderMultiplayer();
+
   onLoad() {
     this.players = [];
     console.log("Loading io...");
     if (!sys.isNative) {
-      this.socket = io("ws://192.168.1.159:3000");
+      this.socket = io("ws://localhost:3000");
       this.socket.on("connect", () => {
         console.log("connected to server");
       });
@@ -61,6 +63,7 @@ export class networkClient extends Component {
     } else {
       console.log("Running in native context");
     }
+
     this.socket.on("playerUpdated", (info) => {
       console.log(this.players);
       const index = this.players.findIndex(
@@ -92,6 +95,7 @@ export class networkClient extends Component {
         // console.log(this.players[index]);
       }
     });
+
     this.socket.on("playerConnected", async (player) => {
       console.log(`Players connected`);
       // console.log(`sexualno ${player}`)
@@ -123,14 +127,17 @@ export class networkClient extends Component {
           }
         }
       }
+
       console.log(this.players);
       const index = this.players.findIndex(
         (myPlayer) => this.socket.id === myPlayer.uuid
       );
+      
       this.players.splice(index, 1);
       await this.renderPlayers();
       // console.log(this.players);
     });
+
     this.socket.on("playerDisconnected", (player) => {
       const index = this.players.findIndex(
         (myPlayer) => player.uuid === myPlayer.uuid
@@ -140,6 +147,7 @@ export class networkClient extends Component {
       // console.log(this.players)
     });
   }
+
   protected async update(dt: number) {
     const pahan = this.node.getParent();
     const positionPlayer = new Vec3();
@@ -157,10 +165,10 @@ export class networkClient extends Component {
     //   Math.floor(fUpdate.z) == Math.floor(this.preLastPosition.z)
     // ) {
     // } else {
-      this.socket.emit("updateData", fUpdate);
-      this.preLastPosition.x = fUpdate.x;
-      this.preLastPosition.y = fUpdate.y;
-      this.preLastPosition.z = fUpdate.z;
+    this.socket.emit("updateData", fUpdate);
+    this.preLastPosition.x = fUpdate.x;
+    this.preLastPosition.y = fUpdate.y;
+    this.preLastPosition.z = fUpdate.z;
     // }
     // console.log(this.players);
   }
