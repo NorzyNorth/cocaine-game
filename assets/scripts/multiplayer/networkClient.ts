@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, sys, Vec3 } from "cc";
+import { _decorator, Component, Node, Quat, sys, Vec3 } from "cc";
 const { ccclass, property } = _decorator;
 import io from "socket.io-client/dist/socket.io.js";
 import { Socket } from "socket.io-client";
@@ -9,6 +9,7 @@ class Player {
   x: number = 0;
   y: number = 0;
   z: number = 0;
+  rot: Quat;
   node: Node | null = null;
   isRendered: boolean = false;
 
@@ -33,6 +34,7 @@ interface UpdateData {
   x: number;
   y: number;
   z: number;
+  rot: Quat;
   uuid: string;
 }
 
@@ -42,6 +44,7 @@ export class networkClient extends Component {
     x: 0,
     y: 0,
     z: 0,
+    rot: new Quat(),
     uuid: "0",
   };
   socket?: Socket = null;
@@ -65,7 +68,7 @@ export class networkClient extends Component {
     }
 
     this.socket.on("playerUpdated", (info) => {
-      console.log(this.players);
+      // console.log(this.players);
       const index = this.players.findIndex(
         (player) => player.uuid === info.uuid
       );
@@ -75,11 +78,13 @@ export class networkClient extends Component {
           x: info.x,
           y: info.y,
           z: info.z,
+          rot: new Quat(info.rot[0], info.rot[1], info.rot[2], info.rot[3]),
           uuid: this.socket.id,
         };
         this.players[index].x = info.x;
         this.players[index].y = info.y;
         this.players[index].z = info.z;
+        this.players[index].rot = info.rot;
 
         // Player movement
         // console.log(this.players[index].node)
@@ -91,7 +96,21 @@ export class networkClient extends Component {
               this.players[index].z
             )
           );
+          this.players[index].node.rotate(this.players[index].rot);
+
+
+
+          console.log(`===============`);
+          console.log(this.players[index].node.getRotation())
+          console.log(this.players[index].rot)
+          console.log(bufInfo.rot)
+          console.log(info.rot)
+          console.log(`===============`);
         }
+
+
+
+
         // console.log(this.players[index]);
       }
     });
@@ -106,6 +125,12 @@ export class networkClient extends Component {
           newPlayer.x = player[i].x;
           newPlayer.y = player[i].y;
           newPlayer.z = player[i].z;
+          newPlayer.rot = new Quat(
+            player[i].rot.x,
+            player[i].rot.y,
+            player[i].rot.z,
+            player[i].rot.w
+          );
           // console.log(`newPlayer ${newPlayer}`)
           this.players.push(newPlayer);
           console.log(newPlayer);
@@ -121,6 +146,12 @@ export class networkClient extends Component {
             newPlayer.x = player[i].x;
             newPlayer.y = player[i].y;
             newPlayer.z = player[i].z;
+            newPlayer.rot = new Quat(
+              player[i].rot.x,
+              player[i].rot.y,
+              player[i].rot.z,
+              player[i].rot.w
+            );
             // console.log(`newPlayer ${newPlayer}`)
             this.players.push(newPlayer);
             console.log(newPlayer);
@@ -132,7 +163,7 @@ export class networkClient extends Component {
       const index = this.players.findIndex(
         (myPlayer) => this.socket.id === myPlayer.uuid
       );
-      
+
       this.players.splice(index, 1);
       await this.renderPlayers();
       // console.log(this.players);
@@ -151,37 +182,35 @@ export class networkClient extends Component {
   protected async update(dt: number) {
     const pahan = this.node.getParent();
     const positionPlayer = new Vec3();
+    const rotationPlayer = new Quat();
     pahan.getWorldPosition(positionPlayer);
+    pahan.getWorldRotation(rotationPlayer);
     // console.log(positionPlayer)
     const fUpdate: UpdateData = {
       x: positionPlayer.x,
       y: positionPlayer.y,
       z: positionPlayer.z,
+      rot: rotationPlayer,
       uuid: this.socket.id,
     };
-    // if (
-    //   Math.floor(fUpdate.x) == Math.floor(this.preLastPosition.x) &&
-    //   Math.floor(fUpdate.y) == Math.floor(this.preLastPosition.y) &&
-    //   Math.floor(fUpdate.z) == Math.floor(this.preLastPosition.z)
-    // ) {
-    // } else {
-    this.socket.emit("updateData", fUpdate);
-    this.preLastPosition.x = fUpdate.x;
-    this.preLastPosition.y = fUpdate.y;
-    this.preLastPosition.z = fUpdate.z;
-    // }
+    if (
+      fUpdate.x == this.preLastPosition.x &&
+      fUpdate.y == this.preLastPosition.y &&
+      fUpdate.z == this.preLastPosition.z
+    ) {
+    } else {
+      this.socket.emit("updateData", fUpdate);
+      this.preLastPosition.x = fUpdate.x;
+      this.preLastPosition.y = fUpdate.y;
+      this.preLastPosition.z = fUpdate.z;
+    }
     // console.log(this.players);
   }
 
   protected async renderPlayers() {
     if (!this.players.length) return;
-    // console.log(this.players.length)
     for (let player of this.players) {
       if (player.node === null) {
-        console.log(`big chlen`);
-        // console.log(`${player.isRendered}`)
-        // console.log(player.node)
-        // const renderMultiplayer1 = new renderMultiplayer();
         player.node = await this.renderMultiplayer1.createObject();
       }
     }
